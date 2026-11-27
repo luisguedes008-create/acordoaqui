@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acordo Aqui · NBC Bank | Atendimento Maxiserv</title>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<script>
+  // Marca em texto (sem logo de terceiros).
+  function logoFallback(img){
+    var s = document.createElement('span');
+    s.className = 'logo-fallback' + (img.dataset.dark ? ' dark' : '');
+    s.textContent = 'Acordo Aqui · NBC Bank';
+    img.replaceWith(s);
+  }
+</script>
+<style>
+  :root{
+    /* Paleta: azul-marinho e verde-limão. Sem logo da NBC (precisa de manual de marca + autorização). */
+    --g900:#0F2556;
+    --g800:#15347A;
+    --g700:#1C4296;
+    --g600:#2A55B5;
+    --g500:#3C6AD0;
+    --g100:#E3EAF7;
+    --g50:#F2F5FB;
+    --yellow:#C8D400;
+    --yellow-soft:#F6F9D2;
+    --red:#D9444A;
+    --ink:#14213D;
+    --ink2:#55627A;
+    --line:rgba(20,33,61,0.12);
+    --bg:#F6F8FC;
+    --card:#FFFFFF;
+    --shadow:0 22px 44px -26px rgba(15,37,86,0.45);
+  }
+  *{box-sizing:border-box;}
+  [hidden]{display:none !important;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Manrope',system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  a{color:inherit;}
+  button{font-family:inherit;}
+
+  /* ---------- Topbar ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:20;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-in{
+    max-width:1040px;margin:0 auto;padding:11px 20px;
+    display:flex;align-items:center;gap:20px;
+  }
+  .brand{border:none;background:none;padding:0;cursor:pointer;display:flex;align-items:center;}
+  .logo{height:32px;display:block;}
+  .logo-fallback{font-weight:800;font-size:24px;letter-spacing:-0.02em;color:var(--g700);}
+  .logo-fallback.dark{color:#fff;}
+  .spacer{flex:1;}
+  .nav{display:none;gap:24px;font-size:14px;font-weight:600;}
+  .nav a{text-decoration:none;color:var(--ink2);}
+  .nav a:hover{color:var(--g700);}
+  @media(min-width:720px){.nav{display:flex;}}
+  .partner-btn{
+    border:1.5px solid var(--line);
+    background:#fff;
+    color:var(--g800);
+    font-weight:700;
+    font-size:12.5px;
+    padding:9px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .partner-btn:hover{background:var(--g50);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    max-width:1040px;margin:0 auto;
+    padding:34px 20px 26px;
+    display:grid;gap:30px;
+  }
+  @media(min-width:860px){
+    .hero{grid-template-columns:1.1fr 0.9fr;align-items:center;padding:60px 24px 36px;gap:40px;}
+  }
+  .pill{
+    display:inline-flex;align-items:center;gap:7px;
+    background:var(--g100);color:var(--g800);
+    font-size:12px;font-weight:700;
+    padding:6px 12px;border-radius:999px;
+    margin-bottom:16px;
+  }
+  .pill i{width:7px;height:7px;border-radius:50%;background:var(--g500);display:block;}
+  h1.slogan{
+    font-size:clamp(36px,8vw,56px);
+    line-height:1.03;
+    letter-spacing:-0.035em;
+    font-weight:800;
+    margin:0 0 14px;
+    color:var(--g900);
+  }
+  h1.slogan em{font-style:normal;color:var(--g500);}
+  .lede{font-size:16px;color:var(--ink2);max-width:470px;margin:0 0 22px;}
+
+  .lookup{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:16px;
+    box-shadow:var(--shadow);
+    max-width:470px;
+  }
+  .lookup label{display:block;font-size:12px;font-weight:700;color:var(--ink2);margin-bottom:7px;}
+  .lookup-row{display:flex;flex-direction:column;gap:10px;}
+  @media(min-width:520px){.lookup-row{flex-direction:row;}}
+  input[type=text],input[type=password],select{
+    width:100%;
+    padding:13px 14px;
+    border-radius:11px;
+    border:1.5px solid var(--line);
+    background:#fff;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:15px;
+    color:var(--ink);
+    outline:none;
+    transition:border-color .15s;
+  }
+  input:focus,select:focus{border-color:var(--g500);}
+  input::placeholder{color:#A5AFC2;font-family:'Manrope',sans-serif;}
+  select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--ink2) 50%),linear-gradient(135deg,var(--ink2) 50%,transparent 50%);background-position:calc(100% - 20px) center,calc(100% - 15px) center;background-size:5px 5px,5px 5px;background-repeat:no-repeat;}
+  .btn{
+    border:none;cursor:pointer;
+    background:var(--g600);color:#fff;
+    font-weight:800;font-size:15px;
+    padding:14px 20px;border-radius:11px;
+    transition:background .15s, transform .1s;
+    white-space:nowrap;
+  }
+  .btn:hover{background:var(--g700);}
+  .btn:active{transform:scale(0.98);}
+  .btn.block{width:100%;}
+  .btn.ghost{background:transparent;color:var(--ink2);border:1.5px solid var(--line);font-weight:700;}
+  .btn.ghost:hover{background:var(--g50);}
+  .btn.wa{background:#fff;color:var(--g800);}
+  .btn.wa:hover{background:var(--g100);}
+  .help-nc{margin-top:12px;padding:14px;border:1px solid #f1c6c2;background:#fdecea;border-radius:12px;}
+  .help-nc p{margin:0 0 10px;font-size:14px;color:#7a1e18;font-weight:600;}
+  .btn-wa{display:block;text-align:center;text-decoration:none;background:#2A55B5;color:#fff;font-weight:700;padding:12px 14px;border-radius:10px;font-size:15px;}
+  /* tela de pagamento (opção B): lista de formas + barra de total fixa */
+  .pay-head{display:flex;justify-content:space-between;font-size:13px;color:var(--ink2);margin:6px 0 12px;}
+  .pay-head b{color:var(--ink);}
+  .po{border:1.5px solid var(--line);border-radius:14px;margin-bottom:10px;background:#fff;overflow:hidden;}
+  .po.on{border-color:var(--g600,#2A55B5);background:#F2F5FB;}
+  .po-h{display:block;width:100%;text-align:left;background:none;border:0;padding:13px 14px;cursor:pointer;font:inherit;color:inherit;}
+  .po-t{display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:800;font-size:15.5px;}
+  .po-p{color:var(--g800,#15347A);font-family:var(--mono,ui-monospace,monospace);font-size:15px;white-space:nowrap;}
+  .po-s{font-size:12.5px;color:var(--ink2);margin-top:3px;font-weight:400;}
+  .po-dot{display:inline-block;width:16px;height:16px;border:2px solid #B9C2D4;border-radius:50%;margin-right:8px;vertical-align:-3px;box-sizing:border-box;}
+  .po.on .po-dot{border:5px solid var(--g600,#2A55B5);}
+  .po-bdg{font-size:10.5px;font-weight:800;background:#ffd45c;color:#4a3200;padding:2px 7px;border-radius:99px;margin-left:6px;vertical-align:1px;}
+  .po-body{padding:0 14px 14px;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 6px;}
+  .chip{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;font:inherit;font-size:13px;font-weight:800;text-align:center;min-width:76px;line-height:1.25;cursor:pointer;color:var(--ink);}
+  .chip small{display:block;font-weight:500;color:var(--ink2);font-size:11.5px;}
+  .chip.on{border-color:var(--g600,#2A55B5);background:var(--g50,#E3EAF7);color:var(--g800,#15347A);}
+  .lnk{display:block;text-align:center;font-size:12.5px;color:var(--ink2);margin-top:8px;background:none;border:0;text-decoration:underline;cursor:pointer;width:100%;font-family:inherit;}
+  .paybar{position:sticky;bottom:0;z-index:5;background:#fff;border-top:1px solid var(--line);box-shadow:0 -6px 14px rgba(20,33,61,.06);margin:14px -22px 0;padding:10px 22px 12px;}
+  .paybar .r{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;color:var(--ink2);}
+  .paybar .r b{font-size:22px;color:var(--g800,#15347A);font-family:var(--mono,ui-monospace,monospace);}
+  .paybar details{border:0;background:none;border-radius:0;padding:0;margin:4px 0 0;}
+  .paybar summary{cursor:pointer;color:var(--g700,#1C4296);font-weight:700;font-size:12.5px;padding:2px 0;display:block;text-align:left;}
+  .paybar summary::after,.paybar details[open] summary::after{content:none;}
+  .paybar .row{padding:5px 0;font-size:13px;}
+  .acordo-card{margin-top:14px;}
+  .ac-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:13px;color:var(--ink2);}
+  .ac-top b{color:var(--ink);}
+  .ac-old{text-decoration:line-through;color:#b3261e;font-size:13px;margin-top:8px;font-family:var(--mono,ui-monospace,monospace);}
+  .ac-big{font-size:30px;font-weight:800;line-height:1.1;color:var(--g800,#15347A);font-family:var(--mono,ui-monospace,monospace);}
+  .ac-badge{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:700;background:var(--g50,#E3EAF7);color:var(--g700,#1C4296);padding:4px 10px;border-radius:99px;}
+  .ac-cart{margin-top:12px;padding:9px 12px;border-radius:10px;background:#fff8e1;border:1px dashed #e0b43a;color:#4a3200;font-size:13.5px;}
+  .acordo-card details{margin-top:12px;font-size:13.5px;}
+  .acordo-card details{border:0;background:none;border-radius:0;padding:0;margin:12px 0 0;box-shadow:none;}
+  .acordo-card summary{cursor:pointer;color:var(--g700,#1C4296);font-weight:700;list-style:none;padding:2px 0;font-size:13.5px;text-align:center;}
+  .acordo-card summary::after,.acordo-card details[open] summary::after{content:none;}
+  .acordo-card details[open] summary{margin-bottom:6px;}
+  .acordo-card summary::-webkit-details-marker{display:none;}
+  .acordo-card details .row{padding:7px 0;font-size:13.5px;}
+  .ac-line{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+  .ac-line .nm{font-weight:800;}
+  .ac-line .eco{font-size:12.5px;color:var(--g700,#1C4296);font-weight:700;}
+  .ac-line .vl{font-size:21px;font-weight:800;text-align:right;color:var(--g800,#15347A);font-family:var(--mono,ui-monospace,monospace);}
+  .ac-line .vl small{display:block;font-size:11.5px;font-weight:400;color:#b3261e;text-decoration:line-through;}
+  .ac-mini{text-align:center;margin-top:10px;font-size:12.5px;color:var(--ink2);}
+  .mini-info{margin:8px 0 0;font-size:13px;color:var(--ink2);text-align:right;}
+  .err{display:block;font-size:12px;font-weight:600;color:var(--red);margin-top:6px;min-height:0;}
+  .demo-hint{font-size:11px;color:#8A94A8;margin:9px 2px 0;}
+  .trust{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px;font-size:12.5px;font-weight:600;color:var(--ink2);}
+  .trust span::before{content:"✓";color:var(--g500);font-weight:800;margin-right:6px;}
+
+  .hero-art{
+    position:relative;
+    min-height:300px;
+    border-radius:28px;
+    background:linear-gradient(155deg,var(--g700) 0%,var(--g500) 100%);
+    overflow:hidden;
+    display:flex;align-items:flex-end;justify-content:center;
+  }
+  .hero-art::before,.hero-art::after{content:"";position:absolute;border-radius:50%;}
+  .hero-art::before{width:260px;height:260px;background:rgba(255,255,255,0.09);top:-80px;right:-70px;}
+  .hero-art::after{width:150px;height:150px;background:rgba(200,212,0,0.25);bottom:-50px;left:-40px;}
+  .hero-art img{position:relative;z-index:1;max-height:340px;max-width:90%;display:block;object-fit:contain;}
+  @media(min-width:860px){.hero-art{min-height:420px;}.hero-art img{max-height:400px;}}
+  .art-tag{
+    position:absolute;z-index:2;top:16px;left:16px;
+    background:rgba(255,255,255,0.95);color:var(--g800);
+    font-size:11.5px;font-weight:800;
+    padding:7px 12px;border-radius:999px;
+  }
+
+  /* ---------- Stats ---------- */
+  .stats{background:var(--g900);color:#fff;}
+  .stats-in{
+    max-width:1040px;margin:0 auto;padding:26px 20px;
+    display:grid;grid-template-columns:repeat(2,1fr);gap:20px;
+  }
+  @media(min-width:760px){.stats-in{grid-template-columns:repeat(4,1fr);}}
+  .stat b{display:block;font-size:28px;font-weight:800;letter-spacing:-0.02em;color:var(--yellow);}
+  .stat span{font-size:12.5px;color:rgba(255,255,255,0.78);}
+  .stats-note{max-width:1040px;margin:0 auto;padding:0 20px 16px;font-size:11px;color:rgba(255,255,255,0.5);}
+
+  /* ---------- Sections ---------- */
+  .section{max-width:1040px;margin:0 auto;padding:46px 20px 6px;}
+  .section h2{font-size:clamp(25px,5vw,34px);letter-spacing:-0.025em;font-weight:800;margin:0 0 8px;color:var(--g900);}
+  .section p.sub{color:var(--ink2);margin:0 0 24px;max-width:560px;}
+  .steps3{display:grid;gap:14px;}
+  @media(min-width:760px){.steps3{grid-template-columns:repeat(3,1fr);}}
+  .step-card{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:18px;padding:22px 20px;
+  }
+  .step-num{
+    width:34px;height:34px;border-radius:50%;
+    background:var(--g100);color:var(--g700);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;margin-bottom:12px;
+  }
+  .step-card h3{margin:0 0 6px;font-size:17px;font-weight:800;}
+  .step-card p{margin:0;font-size:14px;color:var(--ink2);}
+
+  .alert{
+    display:flex;gap:14px;align-items:flex-start;
+    background:var(--yellow-soft);
+    border:1.5px solid #F1D98A;
+    border-radius:16px;padding:18px;
+    margin-top:26px;
+  }
+  .alert .ic{font-size:22px;line-height:1;}
+  .alert b{display:block;margin-bottom:3px;color:#6B4E00;}
+  .alert span{font-size:14px;color:#7A5C0A;}
+
+  details{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:14px;padding:0 18px;margin-bottom:10px;
+  }
+  summary{
+    cursor:pointer;list-style:none;
+    font-weight:700;padding:16px 0;
+    display:flex;justify-content:space-between;gap:12px;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary::after{content:"+";font-size:20px;color:var(--g600);line-height:1;}
+  details[open] summary::after{content:"–";}
+  details p{margin:0 0 16px;color:var(--ink2);font-size:14.5px;}
+
+  .cta{
+    max-width:1040px;margin:46px auto 0;padding:0 20px;
+  }
+  .cta-in{
+    background:linear-gradient(135deg,var(--g800),var(--g600));
+    border-radius:24px;color:#fff;
+    padding:32px 24px;
+    display:flex;flex-direction:column;gap:18px;
+  }
+  @media(min-width:760px){.cta-in{flex-direction:row;align-items:center;justify-content:space-between;padding:36px 40px;}}
+  .cta-in h2{color:#fff;margin:0 0 4px;font-size:26px;}
+  .cta-in p{margin:0;color:rgba(255,255,255,0.82);}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--g900);color:rgba(255,255,255,0.75);margin-top:46px;}
+  .foot-in{max-width:1040px;margin:0 auto;padding:34px 20px 26px;display:grid;gap:22px;}
+  @media(min-width:760px){.foot-in{grid-template-columns:1.4fr 1fr 1fr;}}
+  .foot-in h4{margin:0 0 10px;font-size:13px;color:#fff;letter-spacing:0.04em;text-transform:uppercase;}
+  .foot-in a{display:block;font-size:14px;text-decoration:none;margin-bottom:6px;}
+  .foot-in a:hover{color:#fff;}
+  .foot-in p{font-size:13.5px;margin:10px 0 0;max-width:340px;}
+  .foot-legal{max-width:1040px;margin:0 auto;padding:0 20px 28px;font-size:11.5px;color:rgba(255,255,255,0.5);border-top:1px solid rgba(255,255,255,0.1);padding-top:16px;}
+  .logo.footer{height:30px;}
+
+  /* ---------- Fluxo do devedor ---------- */
+  .flow{max-width:480px;margin:0 auto;padding:22px 16px 60px;}
+  .progress{display:flex;gap:6px;margin-bottom:18px;}
+  .progress i{flex:1;height:4px;border-radius:4px;background:var(--g100);transition:background .3s;}
+  .progress i.on{background:var(--g500);}
+  .progress i.done{background:var(--g700);}
+  .card{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:20px;padding:26px 22px;
+    box-shadow:var(--shadow);
+    position:relative;
+  }
+  .step{display:none;}
+  .step.on{display:block;animation:fade .3s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  @media(prefers-reduced-motion:reduce){.step.on{animation:none;}}
+  .eyebrow{font-size:11.5px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--g600);margin-bottom:6px;}
+  .card h2{font-size:24px;line-height:1.15;letter-spacing:-0.025em;font-weight:800;margin:0 0 8px;color:var(--g900);}
+  .card p.sub{font-size:14px;color:var(--ink2);margin:0 0 20px;}
+  .field{margin-bottom:15px;}
+  .field label{display:block;font-size:12px;font-weight:700;color:var(--ink2);margin-bottom:6px;}
+  .field .opt{font-weight:500;color:#8A94A8;}
+  .check{display:flex;gap:10px;align-items:flex-start;margin:4px 0 20px;cursor:pointer;}
+  .check input{width:18px;height:18px;margin-top:2px;accent-color:var(--g600);flex:0 0 auto;}
+  .check span{font-size:12.5px;color:var(--ink2);}
+  .stack > * + *{margin-top:10px;}
+
+  .row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px;}
+  .row:last-child{border-bottom:none;}
+  .row .k{color:var(--ink2);}
+  .row .v{font-family:'IBM Plex Mono',monospace;font-weight:600;text-align:right;}
+  .row.fixed .v{color:var(--ink2);}
+  .row.total{font-size:16px;font-weight:800;}
+  .row.total .k{color:var(--ink);font-weight:800;}
+  .sep{border-top:2px dashed var(--line);margin:14px 0;}
+  .big{text-align:center;padding:6px 0 2px;}
+  .big .lbl{font-size:12px;font-weight:700;color:var(--ink2);text-transform:uppercase;letter-spacing:0.06em;}
+  .big .num{font-family:'IBM Plex Mono',monospace;font-size:36px;font-weight:700;color:var(--g700);}
+  .big .old{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--red);text-decoration:line-through;}
+  .badge{display:inline-block;background:var(--g100);color:var(--g800);font-size:12px;font-weight:800;padding:4px 10px;border-radius:999px;margin-top:6px;}
+  .badge.red{background:#FBE5E6;color:var(--red);}
+
+  .offer{
+    display:flex;align-items:center;gap:12px;
+    border:2px solid var(--g500);background:var(--g50);
+    border-radius:14px;padding:14px;margin:6px 0 4px;
+  }
+  .radio{width:20px;height:20px;border-radius:50%;border:2px solid var(--g500);position:relative;flex:0 0 auto;}
+  .radio::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--g500);}
+  .offer b{display:block;font-size:15px;}
+  .offer small{color:var(--ink2);font-size:12px;}
+  .offer .val{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-weight:700;text-align:right;}
+
+  .tabs{display:flex;gap:8px;margin-bottom:16px;}
+  .tabs button{
+    flex:1;padding:11px 0;border-radius:10px;
+    border:1.5px solid var(--line);background:#fff;
+    font-weight:700;font-size:13.5px;color:var(--ink2);cursor:pointer;
+  }
+  .tabs button.on{background:var(--g700);border-color:var(--g700);color:#fff;}
+  .tabs button{position:relative;}
+  .tabs .tag12{display:block;margin:3px auto 0;width:max-content;font-size:10.5px;font-weight:800;letter-spacing:.02em;line-height:1;padding:3px 7px;border-radius:99px;background:#ffd45c;color:#4a3200;}
+  .parc-cta{display:flex;align-items:center;gap:10px;width:100%;text-align:left;margin-top:14px;padding:12px 14px;border:1.5px dashed #e0b43a;background:#fff8e1;color:#4a3200;border-radius:12px;font:inherit;font-size:13.5px;cursor:pointer;}
+  .parc-cta b{font-weight:800;}
+  .parc-cta .go{margin-left:auto;font-weight:800;white-space:nowrap;}
+  .parc-hl{margin:0 0 14px;padding:14px;border-radius:12px;background:#fff8e1;border:1.5px solid #e0b43a;color:#4a3200;}
+  .parc-hl .t{font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;}
+  .parc-hl .n{font-size:22px;font-weight:800;margin:2px 0;}
+  .parc-hl .s{font-size:13px;}
+  @media(prefers-color-scheme:dark){ :root:not([data-theme="light"]) .parc-cta,:root:not([data-theme="light"]) .parc-hl{background:#3a2e0a;border-color:#a8841f;color:#ffe9a8;} }
+  .pix-box{display:flex;flex-direction:column;align-items:center;gap:12px;padding:6px 0;}
+  .qr{
+    width:156px;height:156px;border-radius:12px;border:1.5px solid var(--line);
+    background:repeating-conic-gradient(var(--g900) 0% 25%, #fff 0% 50%) 0 0/16px 16px;
+  }
+  .code{
+    width:100%;font-family:'IBM Plex Mono',monospace;font-size:11px;
+    background:var(--g50);border:1px solid var(--line);border-radius:9px;
+    padding:9px 10px;word-break:break-all;text-align:center;color:var(--ink2);
+  }
+  .barcode{height:48px;border-radius:6px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 5px,var(--ink) 5px 6px,transparent 6px 11px);margin:8px 0 10px;}
+  .copy{border:none;background:var(--g100);color:var(--g800);font-weight:800;font-size:13px;padding:10px 16px;border-radius:9px;cursor:pointer;}
+  .frow{display:flex;gap:12px;}
+  .frow .field{flex:1;}
+  .secure{
+    display:flex;gap:10px;align-items:flex-start;
+    background:var(--g50);border:1px solid var(--g100);
+    border-radius:12px;padding:12px 14px;margin-top:16px;
+    font-size:12.5px;color:var(--ink2);
+  }
+  .secure b{color:var(--g800);}
+
+  .toast{
+    position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);
+    background:var(--g900);color:#fff;font-size:13px;font-weight:600;
+    padding:12px 18px;border-radius:12px;max-width:90vw;
+    opacity:0;pointer-events:none;transition:all .25s;z-index:80;
+  }
+  .toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  /* ---------- Modal parceiro ---------- */
+  .overlay{
+    display:none;position:fixed;inset:0;background:rgba(15,37,86,0.55);
+    z-index:60;overflow-y:auto;padding:40px 16px;
+    align-items:flex-start;justify-content:center;
+  }
+  .overlay.on{display:flex;}
+  .modal{
+    background:#fff;border-radius:20px;width:100%;max-width:440px;
+    padding:26px 22px;position:relative;box-shadow:var(--shadow);
+  }
+  .x{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:50%;border:none;background:var(--g50);color:var(--ink2);font-size:15px;cursor:pointer;}
+  .tag{display:inline-block;background:var(--g100);color:var(--g800);font-size:11px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-bottom:10px;}
+  .ptable{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px;}
+  .ptable th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink2);padding-bottom:8px;border-bottom:1.5px solid var(--line);}
+  .ptable td{padding:10px 0;border-bottom:1px solid var(--line);}
+  .st-pago{color:var(--g600);font-weight:700;}
+  .st-pend{color:var(--ink2);font-weight:700;}
+  .lnk{color:var(--g700);font-weight:800;cursor:pointer;text-decoration:none;}
+  .locked{padding:13px 14px;border-radius:11px;border:1.5px dashed var(--line);background:var(--g50);font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;color:var(--ink2);}
+  .hint{display:block;font-size:11.5px;color:var(--ink2);margin-top:5px;}
+  .warn{display:block;font-size:11.5px;font-weight:700;color:#B4531F;margin-top:5px;}
+
+.contact-strip{background:var(--g900);color:#fff;font-size:13px}
+.contact-strip .in{max-width:1180px;margin:0 auto;padding:7px 20px;display:flex;gap:8px 22px;justify-content:flex-end;align-items:center;flex-wrap:wrap}
+.contact-strip span.l{opacity:.8;margin-right:auto}
+.contact-strip a{color:#fff;text-decoration:none;font-weight:700;display:inline-flex;align-items:center;gap:6px}
+.contact-strip a:hover{text-decoration:underline}
+.contact-strip .dot{width:8px;height:8px;border-radius:50%;background:var(--yellow);display:inline-block}
+.help-box{background:var(--g50);border:1px solid var(--g100);border-radius:12px;padding:14px 16px;margin:18px 0 0;display:flex;gap:10px 24px;flex-wrap:wrap;align-items:center;font-size:14px}
+.help-box b{color:var(--g800)}
+.help-box a{color:var(--g700);font-weight:700;text-decoration:none;white-space:nowrap}
+.help-box a:hover{text-decoration:underline}
+.cta .phones{margin-top:14px;font-size:15px;line-height:1.7}
+.cta .phones a{color:#fff;font-weight:700;text-decoration:none}
+@media(max-width:640px){.contact-strip .in{justify-content:flex-start}.contact-strip span.l{width:100%}}
+
+/* ---------- BLACK FRIDAY ---------- */
+.bf-strip{background:var(--yellow);color:#0a0a0a;font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;overflow:hidden;white-space:nowrap}
+.bf-strip .track{display:inline-block;padding:8px 0;animation:bfmove 28s linear infinite}
+.bf-strip span{margin:0 22px}
+@keyframes bfmove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.bf-strip .track{animation:none}}
+.bf-band{background:radial-gradient(1200px 400px at 85% -10%,rgba(200,212,0,.22),transparent 60%),#0a0a0a;color:#fff}
+.bf-band .pill{background:var(--yellow);color:#0a0a0a}
+.bf-band .pill i{background:#0a0a0a}
+.bf-band h1.slogan{color:#fff}
+.bf-band h1.slogan em{color:var(--yellow)}
+.bf-band .lede{color:rgba(255,255,255,.82)}
+.bf-band .trust span{color:rgba(255,255,255,.85)}
+.bf-band .demo-hint{color:rgba(255,255,255,.6)}
+.bf-tag{display:inline-block;font-weight:900;letter-spacing:.14em;font-size:13px;color:var(--yellow);border:2px solid var(--yellow);padding:5px 12px;border-radius:6px;margin:0 0 12px}
+.bf-big{display:block;font-size:clamp(15px,3.4vw,19px);font-weight:700;color:var(--yellow);margin:-4px 0 14px}
+</style>
+</head>
+<body>
+
+<!-- ============ TOPBAR ============ -->
+<div class="bf-strip" aria-label="Black Friday"><div class="track"><span>Black Friday NBC</span><span>★</span><span>Descontos imperdíveis para quitar sua dívida</span><span>★</span><span>Black Friday NBC</span><span>★</span><span>Descontos imperdíveis para quitar sua dívida</span><span>★</span><span>Black Friday NBC</span><span>★</span><span>Descontos imperdíveis para quitar sua dívida</span><span>★</span><span>Black Friday NBC</span><span>★</span><span>Descontos imperdíveis para quitar sua dívida</span><span>★</span><span>Black Friday NBC</span><span>★</span><span>Descontos imperdíveis para quitar sua dívida</span><span>★</span><span>Black Friday NBC</span><span>★</span><span>Descontos imperdíveis para quitar sua dívida</span><span>★</span></div></div>
+<div class="contact-strip"><div class="in">
+  <span class="l">Dúvidas? Fale com a gente</span>
+  <a href="https://wa.me/555133011705?text=Oi!%20Tenho%20uma%20d%C3%BAvida%20sobre%20o%20meu%20acordo." target="_blank" rel="noopener"><span class="dot"></span>WhatsApp: +55 51 3301-1705</a>
+  <a href="tel:08000003232">Telefone: 0800 000 3232</a>
+</div></div>
+<header class="topbar">
+  <div class="topbar-in">
+    <button class="brand" onclick="showLanding()" aria-label="Voltar ao início">
+      <span class="logo-fallback">Acordo Aqui · NBC Bank</span>
+    </button>
+    <div class="spacer"></div>
+    <nav class="nav">
+      <a href="#como-funciona" onclick="showLanding()">Como funciona</a>
+      <a href="#seguranca" onclick="showLanding()">Segurança</a>
+      <a href="#duvidas" onclick="showLanding()">Dúvidas</a>
+    </nav>
+    <button class="partner-btn" onclick="openPartner()">Área do parceiro</button>
+  </div>
+</header>
+
+<main>
+<!-- ============ LANDING ============ -->
+<div id="landing">
+  <div class="bf-band">
+  <section class="hero">
+    <div>
+      <span class="bf-tag">BLACK FRIDAY</span>
+      <span class="pill"><i></i>Condições especiais por tempo limitado</span>
+      <h1 class="slogan">Descontos <em>imperdíveis</em> para regularizar sua dívida.</h1>
+      <span class="bf-big">Aproveite a Black Friday do NBC: quite com desconto, por Pix, boleto ou cartão.</span>
+      <p class="lede">Digite seu CPF, confira o melhor valor disponível para o seu caso e pague de forma rápida e segura.</p>
+
+      <div class="lookup">
+        <label for="landingCpf">Digite seu CPF para começar</label>
+        <div class="lookup-row">
+          <input type="text" id="landingCpf" inputmode="numeric" placeholder="000.000.000-00" oninput="this.value=maskCpf(this.value)" onkeydown="if(event.key==='Enter')startFromLanding()">
+          <button class="btn" onclick="startFromLanding()">Consultar →</button>
+        </div>
+        <span class="err" id="landingErr"></span>
+        <p class="demo-hint">Prévia: use o CPF de demonstração 529.982.247-25</p>
+      </div>
+
+      <div class="trust">
+        <span>Consulta gratuita</span>
+        <span>100% online</span>
+        <span>Atendimento por gente de verdade</span>
+      </div>
+    </div>
+
+
+  </section>
+  </div>
+
+
+
+  <section class="section" id="como-funciona">
+    <h2>Pague em três passos</h2>
+    <p class="sub">Sem fila e sem ligação. Tudo acontece aqui, no seu ritmo.</p>
+    <div class="steps3">
+      <div class="step-card"><div class="step-num">1</div><h3>Identifique-se</h3><p>Informe o CPF e o e-mail do seu cadastro. Deixe também um telefone para contato.</p></div>
+      <div class="step-card"><div class="step-num">2</div><h3>Confira seu acordo</h3><p>Veja o detalhamento do valor e o desconto disponível para pagamento à vista.</p></div>
+      <div class="step-card"><div class="step-num">3</div><h3>Pague do seu jeito</h3><p>Pix, boleto ou cartão de crédito. Se precisar parcelar, é no cartão, em até 12x.</p></div>
+    </div>
+  </section>
+
+  <section class="section" id="seguranca">
+    <div class="alert">
+      <div class="ic">⚠️</div>
+      <div>
+        <b>Cuidado com golpes de boleto</b>
+        <span>Golpistas enviam falsas propostas de acordo por mensagem. Só pague o boleto ou o Pix gerado neste portal, ou conferido antes com a sua equipe de atendimento.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="duvidas">
+    <h2>Dúvidas comuns</h2>
+    <p class="sub">Não achou a sua resposta? WhatsApp +55 51 3301-1705 ou telefone 0800 000 3232.</p>
+    <details><summary>Como sei que o boleto é verdadeiro?</summary><p>O boleto válido é o que você gera aqui no portal. Se receber qualquer cobrança por mensagem, confirme com a sua equipe de atendimento antes de pagar.</p></details>
+    <details><summary>Posso parcelar o pagamento?</summary><p>O acordo é quitado à vista, com desconto. Quem precisar parcelar pode fazer isso no cartão de crédito, em até 12 parcelas.</p></details>
+    <details><summary>Por que pedem telefone e e-mail?</summary><p>Para enviar o comprovante e retornos sobre o seu acordo. Autorizar contatos futuros é opcional e você pode retirar a autorização quando quiser. Seus dados seguem a LGPD.</p></details>
+    <details><summary>Não reconheço o valor. E agora?</summary><p>Antes de pagar, fale com um consultor pelo WhatsApp. Ele confere o seu caso e explica cada item do valor.</p></details>
+  </section>
+
+  <section class="cta">
+    <div class="cta-in">
+      <div>
+        <h2>Vamos resolver?</h2>
+        <p>Consulte o seu acordo agora ou fale com um consultor.</p>
+        <div class="phones">WhatsApp: <a href="https://wa.me/555133011705" target="_blank" rel="noopener">+55 51 3301-1705</a><br>Telefone: <a href="tel:08000003232">0800 000 3232</a></div>
+      </div>
+      <div class="stack">
+        <button class="btn wa block" onclick="document.getElementById('landingCpf').focus();window.scrollTo({top:0,behavior:'smooth'})">Consultar meu acordo</button>
+        <a class="btn block" style="display:block;text-align:center;text-decoration:none;background:rgba(255,255,255,0.18);" href="https://wa.me/555133011705?text=Oi!%20Quero%20falar%20com%20um%20consultor%20da%20NBC%20Bank." target="_blank" rel="noopener">Falar no WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ FLUXO DO DEVEDOR ============ -->
+<div id="flow" class="flow" hidden>
+  <div class="progress"><i id="p1"></i><i id="p2"></i><i id="p3"></i></div>
+  <div class="help-box" id="helpFlow"><b>Precisa de ajuda?</b>
+    <a href="https://wa.me/555133011705" target="_blank" rel="noopener">WhatsApp: +55 51 3301-1705</a>
+    <a href="tel:08000003232">Telefone: 0800 000 3232</a></div>
+
+  <!-- Passo 1: identificação -->
+  <div class="step" id="step-1">
+    <div class="card">
+      <div class="eyebrow">Identificação</div>
+      <h2>Vamos achar o seu acordo.</h2>
+      <p class="sub">Informe o CPF e o <b>e-mail do seu cadastro</b> para confirmarmos que o acordo é seu.</p>
+
+      <div class="field"><label>CPF</label><input type="text" id="cpf" inputmode="numeric" placeholder="000.000.000-00" value="529.982.247-25" oninput="this.value=maskCpf(this.value)"><span class="err" id="err-cpf"></span></div>
+      <div class="field"><label>E-mail do seu cadastro</label><input type="text" id="email" inputmode="email" autocomplete="email" placeholder="voce@exemplo.com" value="demo@exemplo.com"><span class="err" id="err-email"></span></div>
+      <div class="field"><label>Telefone com WhatsApp</label><input type="text" id="tel" inputmode="tel" placeholder="(51) 90000-0000" value="(51) 99999-0000" oninput="this.value=maskPhone(this.value)"><span class="err" id="err-tel"></span></div>
+
+      <label class="check">
+        <input type="checkbox" id="consent">
+        <span><b>Opcional:</b> autorizo contatos futuros por telefone, WhatsApp e e-mail sobre este e outros acordos. Posso retirar a autorização quando quiser.</span>
+      </label>
+
+      <div style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+        <label>Não preencha este campo<input type="text" id="xq_ref" name="xq_ref" tabindex="-1" autocomplete="off" aria-hidden="true"></label>
+      </div>
+      <div id="ts-wrap" style="margin:14px 0 0"><div id="ts-msg" style="font-size:13px;margin:0 0 6px;opacity:.8">Confirme abaixo que você é uma pessoa:</div><div id="ts" style="min-height:65px"></div></div>
+      <span class="err" id="err-geral" style="display:block;margin-top:10px"></span>
+      <div id="box-ajuda" class="help-nc" style="display:none" role="alert">
+        <p id="ajuda-msg" style="margin:0"></p>
+      </div>
+      <button class="btn block" id="btnConsultar" onclick="submitIdentification()">Consultar meu acordo →</button>
+    </div>
+  </div>
+
+  <!-- Passo 2: acordo -->
+  <!-- Tela de ajuda: aparece depois de 2 tentativas com dados que não conferem -->
+  <div class="step" id="step-ajuda">
+    <div class="card" style="text-align:center">
+      <div class="eyebrow">Precisamos conferir com você</div>
+      <h2>Não conseguimos confirmar os seus dados.</h2>
+      <p class="sub">Para a sua segurança, o e-mail precisa ser o mesmo do cadastro. Nossa equipe confere o seu caso rapidinho e te ajuda a seguir com o acordo.</p>
+      <a class="btn-wa" id="ajuda-wa" target="_blank" rel="noopener" href="https://wa.me/555133011705?text=Oi!%20Os%20meus%20dados%20n%C3%A3o%20conferem%20no%20portal%20de%20acordos%20e%20preciso%20de%20ajuda."
+         style="font-size:17px;padding:16px 14px;text-transform:uppercase;letter-spacing:.02em">Falar com nossa equipe</a>
+      <p class="sub" style="margin-top:14px;font-size:13px">WhatsApp +55 51 3301-1705<br>ou telefone 0800 000 3232</p>
+    </div>
+  </div>
+
+  <div class="step" id="step-2">
+    <div class="card">
+      <div class="eyebrow" id="acordosEyebrow">Acordo de pagamento</div>
+      <h2 id="acordosTitulo">Encontramos o seu acordo.</h2>
+      <p class="sub" id="acordosSub">Confira o valor e pague à vista, com desconto.</p>
+    </div>
+    <div id="listaAcordos"></div>
+    <button class="btn ghost block" style="margin-top:14px" onclick="goTo(1)">Voltar</button>
+  </div>
+
+  <!-- Passo 4: pagamento -->
+  <div class="step" id="step-4">
+    <div class="card">
+      <div class="eyebrow">Pagamento</div>
+      <h2>Como você prefere pagar?</h2>
+      <div class="pay-head"><span>Contrato <b id="sumContrato">—</b></span><span><a href="#" onclick="goTo(2);return false" style="color:var(--g700);font-weight:700">Trocar contrato</a></span></div>
+
+      <div class="po on" id="tab-pix">
+        <button type="button" class="po-h" onclick="selectPay('pix')">
+          <div class="po-t"><div><span class="po-dot"></span>Pix <span class="po-bdg">na hora</span></div><span class="po-p" id="pPix">—</span></div>
+          <div class="po-s">Aprovação imediata, com código copia e cola</div>
+        </button>
+        <div class="po-body" id="pay-pix">
+          <div class="pix-box">
+            <div class="qr" id="pixQr"></div>
+            <div class="code" id="pixCode">00020126580014BR.GOV.BCB.PIX0136flex-demo-5204000053039865802BR</div>
+            <button class="copy" onclick="copyText('pixCode')">Copiar código Pix</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="po" id="tab-boleto">
+        <button type="button" class="po-h" onclick="selectPay('boleto')">
+          <div class="po-t"><div><span class="po-dot"></span>Boleto</div><span class="po-p" id="pBoleto">—</span></div>
+          <div class="po-s">Pague no app do seu banco ou internet banking</div>
+        </button>
+        <div class="po-body" id="pay-boleto" hidden>
+          <div class="barcode"></div>
+          <div class="code" id="boletoCode">23793.38128 60007.827018 71000.063305 1 99230000074500</div>
+          <div style="text-align:center;margin-top:12px"><button class="copy" onclick="copyText('boletoCode')">Copiar linha digitável</button> <span id="boletoLink"></span></div>
+        </div>
+      </div>
+
+      <div class="po" id="tab-cartao">
+        <button type="button" class="po-h" onclick="selectPay('cartao')">
+          <div class="po-t"><div><span class="po-dot"></span>Cartão <span class="po-bdg" id="pCartaoBdg">até 12x</span></div><span class="po-p" id="pCartao">—</span></div>
+          <div class="po-s">Parcele no cartão de crédito</div>
+        </button>
+        <div class="po-body" id="pay-cartao" hidden>
+          <div class="field"><label>Número do cartão</label><input type="text" placeholder="0000 0000 0000 0000" maxlength="19"></div>
+          <div class="field"><label>Nome impresso no cartão</label><input type="text" placeholder="Como está no cartão"></div>
+          <div class="frow">
+            <div class="field"><label>Validade</label><input type="text" placeholder="MM/AA" maxlength="5"></div>
+            <div class="field"><label>CVV</label><input type="text" placeholder="000" maxlength="4"></div>
+          </div>
+          <select id="parcelas" hidden></select>
+          <div class="chips" id="parcChips"></div>
+          <button type="button" class="lnk" id="parcMais" onclick="toggleParcelas()">ver todas as parcelas</button>
+        </div>
+      </div>
+
+      <div class="paybar">
+        <div class="r"><span>Total a pagar</span><b id="sumTotal">—</b></div>
+        <p class="mini-info" id="sumInfo" style="text-align:left;margin:2px 0 0"></p>
+        <details><summary>Ver composição do valor ▾</summary>
+          <div class="row"><span class="k">Valor do acordo</span><span class="v" id="sumAcordo">—</span></div>
+          <div class="row"><span class="k">Taxa de processamento</span><span class="v" id="sumTaxa">—</span></div>
+        </details>
+        <button class="btn block" style="margin-top:10px" id="btnGerar" onclick="gerarCobranca()">Gerar cobrança</button>
+        <p class="mini-info" id="cartNote" style="text-align:center;margin:8px 0 0" hidden>Você digita os dados do cartão em uma página segura do Asaas. Eles não passam por este site.</p>
+      </div>
+      <div class="secure" style="margin-top:16px"><span>🔒</span><span><b>Pague só aqui.</b> Desconfie de cobranças recebidas por mensagem.</span></div>
+      <button class="btn ghost block" style="margin-top:12px" onclick="goTo(2)">Voltar</button>
+    </div>
+  </div>
+</div>
+</main>
+
+<!-- ============ RODAPÉ ============ -->
+<footer>
+  <div class="foot-in">
+    <div>
+      <span class="logo-fallback dark">Acordo Aqui · NBC Bank</span>
+      <p>Atendimento de acordos da carteira NBC Bank, pela Maxiserv.</p>
+    </div>
+    <div>
+      <h4>Atendimento</h4>
+      <a href="https://wa.me/555133011705" target="_blank" rel="noopener">WhatsApp: +55 51 3301-1705</a>
+      <a href="tel:08000003232">Telefone: 0800 000 3232</a>
+          </div>
+  </div>
+  <div class="foot-legal">Atendimento: L. F. de Almeida Guedes Serviços Ltda. · CNPJ 65.064.940/0001-90 · Rua Capistrano de Abreu, 1335, Casa 02, Niterói, Canoas, RS · CEP 92120-131 · nbc.acordoaqui.com.br</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<!-- ============ ÁREA DO PARCEIRO ============ -->
+<div class="overlay" id="pm" onclick="if(event.target===this)closePartner()">
+  <div class="modal">
+    <button class="x" onclick="closePartner()" aria-label="Fechar">✕</button>
+
+    <div id="pLogin">
+      <span class="tag">Acesso restrito</span>
+      <h2 style="font-size:22px;margin:0 0 6px;color:var(--g900)">Área do parceiro</h2>
+      <p class="sub" style="font-size:14px;color:var(--ink2);margin:0 0 18px">Credores cadastrados entram com CNPJ e senha para consultar e emitir boletos dos seus clientes.</p>
+      <div class="field"><label>CNPJ</label><input type="text" id="pCnpj" inputmode="numeric" placeholder="00.000.000/0001-00" oninput="this.value=maskCnpj(this.value)"></div>
+      <div class="field"><label>Senha</label><input type="password" id="pSenha" placeholder="••••••••"></div>
+      <span class="err" id="pErr"></span>
+      <button class="btn block" style="margin-top:10px" onclick="partnerLogin()">Entrar →</button>
+      <p style="text-align:center;font-size:12px;color:var(--ink2);margin:12px 0 0">Esqueceu a senha? Fale com o time Maximiza.</p>
+    </div>
+
+    <div id="pList" hidden>
+      <span class="tag" id="pCredor">NBC Bank</span>
+      <h2 style="font-size:22px;margin:0 0 6px;color:var(--g900)">Boletos dos seus clientes</h2>
+      <p style="font-size:14px;color:var(--ink2);margin:0">Cobranças da sua carteira nos últimos 30 dias.</p>
+      <table class="ptable">
+        <thead><tr><th>Cliente</th><th>Valor</th><th>Status</th><th>Ação</th></tr></thead>
+        <tbody id="pBody"></tbody>
+      </table>
+      <button class="btn ghost block" style="margin-top:18px" onclick="closePartner()">Fechar</button>
+    </div>
+
+    <div id="pEmit" hidden>
+      <span class="tag">Emissão de boleto</span>
+      <h2 style="font-size:22px;margin:0 0 6px;color:var(--g900)" id="emNome">Cliente</h2>
+      <p style="font-size:13.5px;color:var(--ink2);margin:0 0 16px">Juros e multa podem ser reduzidos livremente, até zero. O valor principal aceita desconto de até 80%. Os honorários de cobrança são fixos e não podem ser alterados.</p>
+
+      <div class="field"><label>Valor principal</label><input type="text" id="emPrincipal" oninput="recalcEmissao()" onblur="snapPrincipal()"><span class="hint" id="emHint">—</span><span class="warn" id="emWarn" hidden>Ajustado ao mínimo permitido (desconto máx. de 80%).</span></div>
+      <div class="field"><label>Juros <span class="opt">(livre, pode zerar)</span></label><input type="text" id="emJuros" oninput="recalcEmissao()"></div>
+      <div class="field"><label>Multa <span class="opt">(livre, pode zerar)</span></label><input type="text" id="emMulta" oninput="recalcEmissao()"></div>
+      <div class="field"><label>Honorários de cobrança <span class="opt">🔒 não editável</span></label><div class="locked" id="emHon">—</div></div>
+
+      <div class="sep"></div>
+      <div class="row"><span class="k">Desconto concedido</span><span class="v" id="emDesc">—</span></div>
+      <div class="row total"><span class="k">Total do boleto</span><span class="v" id="emTotal">—</span></div>
+
+      <button class="btn block" style="margin-top:16px" onclick="gerarBoletoParceiro()">Gerar boleto →</button>
+      <button class="btn ghost block" style="margin-top:10px" onclick="showPartnerView('list')">Voltar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* =====================================================================
+     CARTEIRA / TEMA — na versão real isso vem do cadastro do credor.
+     Trocar de credor = trocar este objeto (marca, textos, regras).
+     ===================================================================== */
+  // Carteira por subdomínio: nbc.acordoaqui.com.br -> NBC Bank (em produção, vem do Supabase)
+  var CARTEIRAS_POR_HOST = { 'nbc': 'NBC Bank' };
+  var HOST_SUB = (location.hostname.split('.')[0] || '').toLowerCase();
+  var CARTEIRA_HOST = CARTEIRAS_POR_HOST[HOST_SUB] || 'NBC Bank';
+  var CARTEIRA = {
+    credor: CARTEIRA_HOST,
+    produto: 'Acordo de pagamento',
+    contrato: '•••• 4471',
+    whatsapp: '555133011705'
+  };
+  // Fonte da verdade no banco (tabela contratos). Honorários nunca são editáveis.
+  /* ---------- modo real x demonstração ----------
+     Preencha TURNSTILE_SITEKEY (chave pública do Cloudflare Turnstile) para ligar o modo real:
+     o portal passa a chamar /api/sessao e /api/cobranca. Sem a chave, continua em demonstração. */
+  var TURNSTILE_SITEKEY = '0x4AAAAAAFyBYwDP3o62iZQ3';
+  var DEMO = !TURNSTILE_SITEKEY;
+  var SESSAO = null, tsToken = '', tsId = null;
+  var CONTRATO = { principal: 6200, juros: 850, multa: 310, diasAtraso: 200, descontoMaxPrincipal: 0.80 };
+  /* prévia: dois contratos do mesmo CPF, para ver a lista empilhada */
+  var DEMO_CONTRATOS = [
+    { id: 'demo1', numero: '•••• 4471', principal: 6200, juros: 850, multa: 310, diasAtraso: 200 },
+    { id: 'demo2', numero: '•••• 9082', principal: 1800, juros: 140, multa: 36,  diasAtraso: 75 }
+  ];
+  var SEL = 0;   /* contrato escolhido para pagar */
+
+  function $(id){ return document.getElementById(id); }
+  function fmt(v){ return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'}); }
+  function digits(s){ return (s||'').replace(/\D/g,''); }
+  function toNum(s){ var n = parseFloat(String(s).replace(/\./g,'').replace(',','.')); return isNaN(n) ? NaN : n; }
+  function toNumInput(s){ var n = parseFloat(String(s).replace(',','.')); return isNaN(n) ? NaN : n; }
+
+  /* ---------- máscaras e validações ---------- */
+  function maskCpf(v){
+    v = digits(v).slice(0,11);
+    return v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2');
+  }
+  function maskCnpj(v){
+    v = digits(v).slice(0,14);
+    return v.replace(/^(\d{2})(\d)/,'$1.$2').replace(/^(\d{2})\.(\d{3})(\d)/,'$1.$2.$3').replace(/\.(\d{3})(\d)/,'.$1/$2').replace(/(\d{4})(\d)/,'$1-$2');
+  }
+  function maskDate(v){
+    v = digits(v).slice(0,8);
+    return v.replace(/(\d{2})(\d)/,'$1/$2').replace(/(\d{2})\/(\d{2})(\d)/,'$1/$2/$3');
+  }
+  function maskPhone(v){
+    v = digits(v).slice(0,11);
+    if(!v.length) return '';
+    if(v.length <= 2) return '(' + v;
+    if(v.length <= 6) return '(' + v.slice(0,2) + ') ' + v.slice(2);
+    if(v.length <= 10) return '(' + v.slice(0,2) + ') ' + v.slice(2,6) + '-' + v.slice(6);
+    return '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+  }
+  function validCpf(c){
+    c = digits(c);
+    if(c.length !== 11 || /^(\d)\1{10}$/.test(c)) return false;
+    for(var t = 9; t < 11; t++){
+      var s = 0;
+      for(var i = 0; i < t; i++) s += parseInt(c[i],10) * (t + 1 - i);
+      var d = ((s * 10) % 11) % 10;
+      if(d !== parseInt(c[t],10)) return false;
+    }
+    return true;
+  }
+  function validDate(s){
+    var m = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(s);
+    if(!m) return false;
+    var d = +m[1], mo = +m[2], y = +m[3];
+    if(mo < 1 || mo > 12 || d < 1 || y < 1900 || y > new Date().getFullYear()) return false;
+    return d <= new Date(y, mo, 0).getDate();
+  }
+  function validEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e); }
+
+  function toast(msg){
+    var t = $('toast'); t.textContent = msg; t.classList.add('on');
+    clearTimeout(toast._t); toast._t = setTimeout(function(){ t.classList.remove('on'); }, 3600);
+  }
+
+  /* ---------- navegação ---------- */
+  function showLanding(){
+    $('flow').hidden = true; $('landing').hidden = false;
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function showFlow(){ $('landing').hidden = true; $('flow').hidden = false; goTo(1); montarTurnstile(); }
+
+  function startFromLanding(){
+    var v = $('landingCpf').value;
+    if(!validCpf(v)){ $('landingErr').textContent = 'Digite um CPF válido para continuar.'; return; }
+    $('landingErr').textContent = '';
+    $('cpf').value = v;
+    showFlow();
+  }
+
+  function goTo(n){
+    [1, 2, 4].forEach(function(i){ $('step-' + i).classList.toggle('on', i === n); });
+    var idx = { 1: 1, 2: 2, 4: 3 }[n];
+    for(var i = 1; i <= 3; i++){ var p = $('p' + i); p.className = i < idx ? 'done' : (i === idx ? 'on' : ''); }
+    $('helpFlow').hidden = n !== 1;   /* ajuda em destaque só na identificação; o topo e o rodapé seguem com os contatos */
+    if(n === 2) renderAcordos();
+    if(n === 4) initPagamento();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function setErr(id, msg){ $(id).textContent = msg || ''; return !msg; }
+
+  function submitIdentification(){
+    var ok = true;
+    ok = setErr('err-cpf', validCpf($('cpf').value) ? '' : 'CPF inválido.') && ok;
+    var t = digits($('tel').value);
+    ok = setErr('err-tel', (t.length === 10 || t.length === 11) ? '' : 'Informe um telefone com DDD.') && ok;
+    ok = setErr('err-email', validEmail($('email').value.trim()) ? '' : 'Informe um e-mail válido.') && ok;
+    if(!ok) return;
+    var contato = { cpf: digits($('cpf').value), telefone: t, email: $('email').value.trim(), autoriza: $('consent').checked };
+    esconderAjuda();
+    if(DEMO){
+      /* Prévia: só o e-mail de demonstração "confere"; qualquer outro mostra o aviso com o botão do WhatsApp. */
+      if(contato.email.toLowerCase() !== 'demo@exemplo.com'){ falhaDeConfirmacao(); return; }
+      ERROS = 0; salvarErros(); goTo(2); return;
+    }
+    consultarSessao(contato);
+  }
+
+  function mostrarAjuda(msg){ $('ajuda-msg').textContent = msg; $('box-ajuda').style.display = 'block'; }
+  function esconderAjuda(){ $('box-ajuda').style.display = 'none'; }
+
+  /* Falhas de confirmação: 1ª = pede para tentar de novo; 2ª = troca a tela e leva ao WhatsApp. */
+  var ERROS = 0;
+  try { ERROS = parseInt(sessionStorage.getItem('erros_id') || '0', 10) || 0; } catch(e) {}
+  function salvarErros(){ try { sessionStorage.setItem('erros_id', String(ERROS)); } catch(e) {} }
+  function irParaEquipe(){
+    [1, 2, 4].forEach(function(i){ $('step-' + i).classList.remove('on'); });
+    $('step-ajuda').classList.add('on');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function falhaDeConfirmacao(){
+    ERROS++; salvarErros();
+    if(ERROS >= 2){ irParaEquipe(); return; }
+    mostrarAjuda('O e-mail não confere com o cadastro. Confira o CPF e o e-mail e tente novamente.');
+  }
+
+  function aplicarSessao(){
+    var c = SESSAO.carteira;
+    CARTEIRA.credor = c.credor; CARTEIRA.produto = c.produto || CARTEIRA.produto;
+    SEL = 0;
+  }
+
+  function consultarSessao(contato){
+    /* sem o token da verificação de segurança o servidor recusa: pede para aguardar em vez de enviar */
+    if(!DEMO && !tsToken){ setErr('err-geral', 'Aguarde a verificação de segurança terminar (caixa acima do botão) e clique em Consultar de novo.'); return; }
+    var btn = $('btnConsultar'); btn.disabled = true; btn.textContent = 'Consultando...';
+    setErr('err-geral', ''); esconderAjuda();
+    var corpo = { cpf: contato.cpf, telefone: contato.telefone, email: contato.email,
+                  autoriza: contato.autoriza, turnstile: tsToken, xq_ref: $('xq_ref').value };
+    fetch('/api/sessao', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(corpo) })
+      .then(function(r){ return r.json().then(function(j){ return { s: r.status, j: j }; }); })
+      .then(function(x){
+        if(x.s === 200){ ERROS = 0; salvarErros(); SESSAO = x.j; aplicarSessao(); goTo(2); return; }
+        var msg = (x.j && x.j.mensagem) || 'Não foi possível consultar agora. Tente novamente.';
+        if(x.s === 401 || x.s === 404){ falhaDeConfirmacao(); }          /* não confere: 1ª tentativa avisa, 2ª leva à equipe */
+        else if(x.s === 422 || x.s === 429){ irParaEquipe(); }           /* precisa de conferência manual / muitas tentativas */
+        else { setErr('err-geral', msg); }
+        if(window.turnstile && tsId !== null){ turnstile.reset(tsId); } tsToken = '';
+      })
+      .catch(function(){ setErr('err-geral', 'Sem conexão. Verifique a internet e tente novamente.'); })
+      .then(function(){ btn.disabled = false; btn.textContent = 'Consultar meu acordo →'; atualizarBtn(); });
+  }
+
+  function montarTurnstile(){
+    if(DEMO || tsId !== null) return;
+    if(!window.turnstile){ setTimeout(montarTurnstile, 600); return; }
+    tsId = turnstile.render('#ts', { sitekey: TURNSTILE_SITEKEY, language: 'pt-br', appearance: 'always', size: 'normal',
+      callback: function(tk){ tsToken = tk; atualizarBtn(); },
+      'expired-callback': function(){ tsToken = ''; atualizarBtn(); },
+      'error-callback': function(){ tsToken = ''; atualizarBtn(); } });
+    atualizarBtn();
+  }
+  /* botão só libera depois que a pessoa marca "sou humano" */
+  function atualizarBtn(){
+    var b = $('btnConsultar'); if(!b || DEMO || b.textContent === 'Consultando...') return;
+    b.disabled = !tsToken;
+    b.textContent = tsToken ? 'Consultar meu acordo →' : 'Marque a caixa acima para continuar';
+  }
+
+  /* ---------- cálculo (só para a prévia; em modo real tudo vem pronto do servidor) ----------
+     Regras NBC (carteira PF cartão de crédito): desconto sobre o valor atualizado da fatura com encargos; a comissão da faixa é somada ao valor com desconto (honorários).
+     A TAC/comissão não é somada ao cliente (fica só no servidor, para relatório). */
+  var FAIXAS = [
+    { de: 46,  ate: 60,       desc: 0,    tac: 0.10 },
+    { de: 61,  ate: 90,       desc: 0.20, tac: 0.10 },
+    { de: 91,  ate: 120,      desc: 0.30, tac: 0.15 },
+    { de: 121, ate: 180,      desc: 0.50, tac: 0.15 },
+    { de: 181, ate: 360,      desc: 0.70, tac: 0.20 },
+    { de: 361, ate: Infinity, desc: 0.85, tac: 0.20 }
+  ];
+  /* Taxas Asaas (tabela padrão, 22/10/2026). SEMPRE repassadas ao cliente: o credor recebe o valor do acordo cheio. */
+  var TAXAS_ASAAS = {
+    pix:    { fixo: 1.99, pct: 0 },
+    boleto: { fixo: 1.99, pct: 0 },
+    cartao: function(n){ return { fixo: 0.49, pct: n === 1 ? 0.0299 : n <= 6 ? 0.0349 : 0.0399 }; }
+  };
+  function r2(v){ return Math.round(v * 100) / 100; }
+  function faixaDe(dias){
+    for(var i = 0; i < FAIXAS.length; i++){ if(dias >= FAIXAS[i].de && dias <= FAIXAS[i].ate) return FAIXAS[i]; }
+    return FAIXAS[0];
+  }
+  /* cálculo local (só na prévia; em modo real tudo vem pronto do servidor) */
+  function calcDe(c){
+    var f = faixaDe(c.diasAtraso);
+    var desconto = r2((c.principal + c.juros + c.multa) * f.desc);
+    var valorAtualizado = r2(c.principal + c.juros + c.multa);
+    var comDesc = r2(valorAtualizado - desconto);
+    var honorarios = r2(comDesc * f.tac);          /* NBC: a comissão da faixa é somada ao valor com desconto */
+    var valorAcordo = r2(comDesc + honorarios);
+    return { valorAtualizado: valorAtualizado, desconto: desconto, honorarios: honorarios, valorAcordo: valorAcordo, economia: Math.max(0, r2(valorAtualizado - valorAcordo)) };
+  }
+  function listaContratos(){ return SESSAO ? SESSAO.contratos : DEMO_CONTRATOS; }
+  function contratoAtual(){ return listaContratos()[SEL] || listaContratos()[0]; }
+  function acordoDe(c){ return c.acordo ? c.acordo : calcDe(c); }
+  function calc(){ return acordoDe(contratoAtual()); }
+  /* total que o cliente paga para o credor receber exatamente valorAcordo, já descontada a taxa do Asaas */
+  /* antecipação do cartão (receber em 2 dias): juros simples ao mês sobre cada parcela; mesmo cálculo do servidor */
+  function fatorAntecipacao(n){
+    var taxa = n === 1 ? 0.0125 : 0.017;
+    return 1 - taxa * (32.1 / 30) * (n + 1) / 2;
+  }
+  function totalComTaxa(valorAcordo, forma, parcelas){
+    var t = forma === 'cartao' ? TAXAS_ASAAS.cartao(parcelas || 1) : TAXAS_ASAAS[forma];
+    var liquido = forma === 'cartao' ? valorAcordo / fatorAntecipacao(parcelas || 1) : valorAcordo;
+    var total = Math.ceil(((liquido + t.fixo) / (1 - t.pct)) * 100 - 1e-9) / 100;
+    return { total: total, taxa: r2(total - valorAcordo) };
+  }
+
+  /* total que o cliente paga: em modo real vem do servidor; em demonstração é calculado aqui */
+  function totalOpcao(forma, n){
+    var c = contratoAtual(), a = acordoDe(c);
+    if(c.opcoes){ var t = forma === 'cartao' ? c.opcoes.cartao[n - 1] : c.opcoes[forma];
+      return { total: t, taxa: r2(t - a.valorAcordo) }; }
+    return totalComTaxa(a.valorAcordo, forma, n);
+  }
+
+  function esc(v){ return String(v).replace(/[&<>"']/g, function(ch){ return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[ch]; }); }
+
+  /* tela única. 1 contrato = bloco completo e compacto (A). 2+ contratos = lista enxuta com valor e botão (C). */
+  function detalheHtml(c, a){
+    return '<div class="row"><span class="k">Valor principal</span><span class="v">' + fmt(c.principal) + '</span></div>' +
+           '<div class="row"><span class="k">Juros</span><span class="v">' + fmt(c.juros) + '</span></div>' +
+           '<div class="row"><span class="k">Multa</span><span class="v">' + fmt(c.multa) + '</span></div>' +
+           '<div class="row"><span class="k">Valor atualizado</span><span class="v">' + fmt(a.valorAtualizado) + '</span></div>' +
+           /* NBC: não exibir honorários ao cliente. O desconto mostrado é o líquido (valor atualizado − total do acordo), assim a conta fecha sem a linha de honorários. */
+           (a.economia > 0 ? '<div class="row"><span class="k">Desconto concedido</span><span class="v">− ' + fmt(a.economia) + '</span></div>' : '') +
+           '<div class="row total"><span class="k">Total do acordo</span><span class="v">' + fmt(a.valorAcordo) + '</span></div>';
+  }
+  function renderAcordos(){
+    var L = listaContratos(), multi = L.length > 1;
+    $('acordosEyebrow').textContent = CARTEIRA.credor || CARTEIRA.produto;
+    $('acordosTitulo').textContent = multi ? 'Encontramos ' + L.length + ' acordos no seu CPF' : 'Encontramos o seu acordo';
+    $('acordosSub').textContent = multi ? 'Cada contrato é pago separadamente. Escolha qual pagar agora.' : '';
+    $('acordosSub').style.display = multi ? '' : 'none';
+    $('listaAcordos').innerHTML = L.map(function(c, i){
+      var a = acordoDe(c);
+      var eco = a.economia > 0 ? 'Você economiza ' + fmt(a.economia) : 'Valor integral, sem desconto';
+      if(!multi){   /* A */
+        return '<div class="card acordo-card">' +
+          '<div class="ac-top"><span>Contrato <b>' + esc(c.numero) + '</b></span><span>' + c.diasAtraso + ' dias em atraso</span></div>' +
+          (a.economia > 0 ? '<div class="ac-old">de ' + fmt(a.valorAtualizado) + '</div>' : '') +
+          '<div class="ac-big">' + fmt(a.valorAcordo) + '</div>' +
+          '<span class="ac-badge">' + eco + '</span>' +
+          (maxParc(c) > 1 ? '<div class="ac-cart">💳 À vista ou <b>até ' + maxParc(c) + 'x no cartão</b></div>' : '') +
+          '<button class="btn block" style="margin-top:14px" onclick="abrirPagamento(0)">Continuar para o pagamento →</button>' +
+          '<details><summary>Ver detalhamento ▾</summary>' + detalheHtml(c, a) + '</details>' +
+        '</div>';
+      }
+      /* C */
+      return '<div class="card acordo-card">' +
+        '<div class="ac-line"><div><div class="nm">Contrato ' + esc(c.numero) + '</div><div class="eco">' + (a.economia > 0 ? 'economia de ' + fmt(a.economia) : 'sem desconto') + '</div></div>' +
+        '<div class="vl">' + (a.economia > 0 ? '<small>' + fmt(a.valorAtualizado) + '</small>' : '') + fmt(a.valorAcordo) + '</div></div>' +
+        '<button class="btn block" style="margin-top:12px" onclick="abrirPagamento(' + i + ')">Pagar este acordo →</button>' +
+        '<div class="ac-mini">' + (maxParc(c) > 1 ? '💳 até ' + maxParc(c) + 'x no cartão · ' : '') + c.diasAtraso + ' dias em atraso</div>' +
+        '<details><summary>Ver detalhes ▾</summary>' + detalheHtml(c, a) + '</details>' +
+      '</div>';
+    }).join('');
+  }
+
+  function abrirPagamento(i){
+    SEL = i;
+    if(!DEMO){   /* limpa o código gerado para outro contrato */
+      $('pixCode').textContent = 'Clique no botão abaixo para gerar o código Pix.';
+      $('pixQr').innerHTML = '';
+      $('boletoCode').textContent = 'Clique no botão abaixo para gerar a linha digitável.';
+      $('boletoLink').innerHTML = '';
+    }
+    goTo(4);
+  }
+
+  /* ---------- pagamento ---------- */
+  var payKind = 'pix';
+  var PARC_TODAS = false;
+  /* Asaas: parcela mínima de R$ 5,00 no cartão. Em modo real o servidor manda cartaoMax; na prévia calcula aqui. */
+  function maxParc(c){
+    c = c || contratoAtual();
+    if(c.opcoes && typeof c.opcoes.cartaoMax === 'number') return c.opcoes.cartaoMax;
+    var a = acordoDe(c), max = 0;
+    for(var n = 1; n <= 12; n++){ if(totalComTaxa(a.valorAcordo, 'cartao', n).total / n >= 5) max = n; else break; }
+    return max;
+  }
+  function parcelaAtual(){ return parseInt($('parcelas').value || '1', 10) || 1; }
+  function initPagamento(){
+    var sel = $('parcelas'); sel.innerHTML = '';
+    var MAXP = maxParc();
+    for(var n = 1; n <= Math.max(MAXP, 1); n++){
+      var o = document.createElement('option'); o.value = n; o.textContent = n + 'x'; sel.appendChild(o);
+    }
+    sel.value = '1'; PARC_TODAS = false;
+    $('tab-cartao').style.display = MAXP === 0 ? 'none' : '';
+    if(MAXP === 0 && payKind === 'cartao') payKind = 'pix';
+    $('pPix').textContent = fmt(totalOpcao('pix').total);
+    $('pBoleto').textContent = fmt(totalOpcao('boleto').total);
+    $('pCartaoBdg').textContent = 'até ' + MAXP + 'x';
+    if(MAXP > 0){ $('pCartao').textContent = MAXP + 'x ' + fmt(totalOpcao('cartao', MAXP).total / MAXP); }
+    renderChips();
+    selectPay(payKind);
+  }
+  function renderChips(){
+    var cur = parcelaAtual();
+    var MAXP = Math.max(maxParc(), 1);
+    var base = PARC_TODAS ? [1,2,3,4,5,6,7,8,9,10,11,12] : [1,3,6,12];
+    var ns = base.filter(function(n){ return n <= MAXP; });
+    if(!PARC_TODAS && ns.indexOf(MAXP) < 0) ns.push(MAXP);
+    if(ns.indexOf(cur) < 0){ ns.push(cur); ns.sort(function(a, b){ return a - b; }); }
+    $('parcChips').innerHTML = ns.map(function(n){
+      var t = totalOpcao('cartao', n).total;
+      return '<button type="button" class="chip' + (n === cur ? ' on' : '') + '" onclick="setParcelas(' + n + ')">' + n + 'x<small>' + fmt(t / n) + '</small></button>';
+    }).join('');
+    $('parcMais').style.display = MAXP <= 3 ? 'none' : '';
+    $('parcMais').textContent = PARC_TODAS ? 'mostrar menos' : 'ver todas as parcelas';
+  }
+  function setParcelas(n){ $('parcelas').value = String(n); renderChips(); updatePaySummary(); }
+  function toggleParcelas(){ PARC_TODAS = !PARC_TODAS; renderChips(); }
+  function selectPay(kind){
+    payKind = kind;
+    ['pix','boleto','cartao'].forEach(function(k){
+      $('tab-' + k).classList.toggle('on', k === kind);
+      $('pay-' + k).hidden = k !== kind;
+    });
+    $('cartNote').hidden = !(kind === 'cartao' && !DEMO);
+    updatePaySummary();
+  }
+  function updatePaySummary(){
+    var c = calc();
+    var n = payKind === 'cartao' ? parcelaAtual() : 1;
+    var t = totalOpcao(payKind, n);
+    $('sumContrato').textContent = contratoAtual().numero;
+    $('sumAcordo').textContent = fmt(c.valorAcordo);
+    $('sumTaxa').textContent = '+ ' + fmt(t.taxa);
+    $('sumTotal').textContent = fmt(t.total);
+    var d = new Date(); d.setDate(d.getDate() + 3);
+    $('sumInfo').textContent = payKind === 'cartao'
+      ? (n === 1 ? 'Cartão à vista' : 'Cartão em ' + n + 'x de ' + fmt(t.total / n))
+      : (payKind === 'pix' ? 'Pix' : 'Boleto') + ' · vence em ' + d.toLocaleDateString('pt-BR');
+    $('btnGerar').textContent = payKind === 'pix' ? 'Gerar Pix · ' + fmt(t.total)
+      : payKind === 'boleto' ? 'Gerar boleto · ' + fmt(t.total)
+      : (n === 1 ? 'Pagar com cartão · ' + fmt(t.total) : 'Pagar com cartão · ' + n + 'x de ' + fmt(t.total / n));
+  }
+  function copyText(id){
+    var txt = $(id).textContent;
+    try{
+      navigator.clipboard.writeText(txt).then(function(){ toast('Copiado!'); }, function(){ toast('Não foi possível copiar automaticamente.'); });
+    }catch(e){ toast('Não foi possível copiar automaticamente.'); }
+  }
+  function gerarCobranca(){
+    if(DEMO){ toast('Demonstração: em produção isto chama /api/cobranca.'); return; }
+    var n = payKind === 'cartao' ? parcelaAtual() : 1;
+    var btn = $('btnGerar'); btn.disabled = true; btn.textContent = 'Gerando...';
+    fetch('/api/cobranca', { method: 'POST',
+        headers: { 'content-type': 'application/json', 'authorization': 'Bearer ' + SESSAO.token },
+        body: JSON.stringify({ contrato: contratoAtual().id, forma: payKind, parcelas: n }) })
+      .then(function(r){ return r.json().then(function(j){ return { s: r.status, j: j }; }); })
+      .then(function(x){
+        if(x.s === 401){ toast('Sua sessão expirou. Consulte o acordo novamente.'); SESSAO = null; showLanding(); return; }
+        if(x.s !== 201){ toast((x.j && x.j.mensagem) || 'Não foi possível gerar a cobrança agora.'); return; }
+        var j = x.j;
+        if(j.pix){
+          $('pixCode').textContent = j.pix.copiaECola;
+          $('pixQr').innerHTML = '<img alt="QR Code do Pix" style="width:100%;height:100%;display:block" src="data:image/png;base64,' + j.pix.qrCodeBase64 + '">';
+        } else if(j.boleto){
+          $('boletoCode').textContent = j.boleto.linhaDigitavel;
+          $('boletoLink').innerHTML = '<a class="copy" style="text-decoration:none;display:inline-block" href="' + j.boleto.url + '" target="_blank" rel="noopener">Abrir boleto</a>';
+        } else if(j.cartao){
+          window.location.href = j.cartao.url; return;
+        }
+        toast('Cobrança gerada. Vencimento em ' + new Date(j.vencimento + 'T12:00:00').toLocaleDateString('pt-BR') + '.');
+      })
+      .catch(function(){ toast('Sem conexão. Tente novamente.'); })
+      .then(function(){ btn.disabled = false; updatePaySummary(); });
+  }
+
+  /* modo real: nada de dados de teste, nada de campos de cartão (o cartão é pago na página segura do Asaas) */
+  function prepararModoReal(){
+    if(DEMO) return;
+    ['cpf','tel','email'].forEach(function(id){ $(id).value = ''; });
+    var hint = document.querySelector('.demo-hint'); if(hint) hint.hidden = true;
+    var legal = document.querySelector('.foot-legal');
+    if(legal) legal.textContent = legal.textContent.replace(' · Prévia com dados fictícios para demonstração.', '');
+    $('pixCode').textContent = 'Clique no botão abaixo para gerar o código Pix.';
+    $('boletoCode').textContent = 'Clique no botão abaixo para gerar a linha digitável.';
+    document.querySelectorAll('#pay-cartao input').forEach(function(i){ var f = i.closest('.field'); if(f) f.hidden = true; });
+    document.querySelectorAll('#pay-cartao .frow').forEach(function(f){ f.hidden = true; });
+  }
+
+  /* ---------- Área do parceiro ---------- */
+  var CLIENTES = [
+    { nome: 'J. da Silva ***', principal: 620,  juros: 85,  multa: 40,  honorarios: 223.62, status: 'pendente' },
+    { nome: 'M. Oliveira ***', principal: 620,  juros: 85,  multa: 40,  honorarios: 223.50, status: 'pago' },
+    { nome: 'R. Santos ***',   principal: 7200, juros: 980, multa: 260, honorarios: 2682,   status: 'pendente' },
+    { nome: 'A. Souza ***',    principal: 290,  juros: 38,  multa: 21.3, honorarios: 104.79, status: 'pago' }
+  ];
+  var emAtual = null;
+  function totalCliente(c){ return c.principal + c.juros + c.multa + c.honorarios; }
+
+  function showPartnerView(v){
+    $('pLogin').hidden = v !== 'login';
+    $('pList').hidden = v !== 'list';
+    $('pEmit').hidden = v !== 'emit';
+  }
+  function openPartner(){ $('pm').classList.add('on'); $('pErr').textContent = ''; showPartnerView('login'); }
+  function closePartner(){ $('pm').classList.remove('on'); }
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closePartner(); });
+
+  function partnerLogin(){
+    if(digits($('pCnpj').value).length !== 14 || !$('pSenha').value){
+      $('pErr').textContent = 'Informe o CNPJ completo e a senha.'; return;
+    }
+    // Produção: POST /api/asaas/login-parceiro { cnpj, senha } -> token de sessão
+    $('pErr').textContent = '';
+    $('pCredor').textContent = CARTEIRA.credor;
+    $('pBody').innerHTML = CLIENTES.map(function(c, i){
+      var pago = c.status === 'pago';
+      return '<tr><td>' + c.nome + '</td><td>' + fmt(totalCliente(c)) + '</td>' +
+        '<td class="' + (pago ? 'st-pago' : 'st-pend') + '">' + (pago ? 'Pago' : 'Pendente') + '</td>' +
+        '<td>' + (pago ? '—' : '<a class="lnk" onclick="openEmissao(' + i + ')">Emitir boleto</a>') + '</td></tr>';
+    }).join('');
+    showPartnerView('list');
+  }
+
+  function openEmissao(i){
+    emAtual = CLIENTES[i];
+    $('emNome').textContent = emAtual.nome;
+    $('emPrincipal').value = emAtual.principal.toFixed(2);
+    $('emJuros').value = emAtual.juros.toFixed(2);
+    $('emMulta').value = emAtual.multa.toFixed(2);
+    $('emHon').textContent = fmt(emAtual.honorarios);
+    $('emHint').textContent = 'Mínimo permitido: ' + fmt(emAtual.principal * (1 - CONTRATO.descontoMaxPrincipal)) + ' (desconto máx. de 80% sobre o principal)';
+    $('emWarn').hidden = true;
+    showPartnerView('emit');
+    recalcEmissao();
+  }
+  function recalcEmissao(){
+    if(!emAtual) return;
+    var min = emAtual.principal * (1 - CONTRATO.descontoMaxPrincipal);
+    var p = toNumInput($('emPrincipal').value); if(isNaN(p)) p = emAtual.principal;
+    var abaixo = p < min; $('emWarn').hidden = !abaixo;
+    var principal = abaixo ? min : p;
+    var j = toNumInput($('emJuros').value); if(isNaN(j) || j < 0) j = 0;
+    var m = toNumInput($('emMulta').value); if(isNaN(m) || m < 0) m = 0;
+    // juros e multa nunca podem passar do valor original; honorários jamais entram no desconto
+    j = Math.min(j, emAtual.juros); m = Math.min(m, emAtual.multa);
+    var total = principal + j + m + emAtual.honorarios;
+    var desc = totalCliente(emAtual) - total;
+    $('emTotal').textContent = fmt(total);
+    $('emDesc').textContent = desc > 0 ? fmt(desc) : 'Nenhum';
+  }
+  function snapPrincipal(){
+    if(!emAtual) return;
+    var min = emAtual.principal * (1 - CONTRATO.descontoMaxPrincipal);
+    var p = toNumInput($('emPrincipal').value);
+    if(isNaN(p) || p < min){ $('emPrincipal').value = min.toFixed(2); recalcEmissao(); }
+  }
+  function gerarBoletoParceiro(){
+    // Produção: POST /api/asaas/emitir-boleto-parceiro — o servidor revalida os limites e lê os honorários do banco.
+    toast('Demonstração: o boleto seria gerado com os honorários preservados.');
+    showPartnerView('list');
+  }
+
+  prepararModoReal();
+  goTo(1); // prepara o fluxo (fica oculto até a consulta)
+</script>
+</body>
+</html>

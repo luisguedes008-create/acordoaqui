@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Digi+ · Regularize suas parcelas</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#000456">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#000456; --navy-2:#01003C; --azul:#000D97; --tinta:#171B3D;
+  --vermelho:#E62A36; --cinza:#F6F6F6; --borda:#E5E7EB; --texto:#171B3D;
+  --suave:#5B5F7A; --ok:#0E8A5F; --raio:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Red Hat Display",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--texto);background:var(--cinza);min-height:100vh;display:flex;flex-direction:column}
+button,input{font:inherit;color:inherit}
+a{color:var(--azul)}
+
+/* Cabeçalho */
+.topo{background:#fff;border-bottom:1px solid var(--borda)}
+.topo .in{max-width:1080px;margin:auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.topo svg{height:40px;width:auto;display:block}
+.selo{font-size:12px;color:var(--suave);text-align:right;line-height:1.3}
+.selo b{color:var(--tinta);font-weight:700}
+
+/* Faixa de destaque */
+.hero{background:radial-gradient(1200px 400px at 85% -10%,#0A1BC2 0%,transparent 60%),linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;position:relative;overflow:hidden}
+.hero .in{max-width:1080px;margin:auto;padding:44px 20px 120px}
+.hero h1{font-size:clamp(28px,5vw,44px);font-weight:800;line-height:1.08;letter-spacing:-.02em;max-width:620px}
+.hero h1 em{font-style:normal;color:var(--vermelho)}
+.hero p{margin-top:14px;font-size:17px;opacity:.82;max-width:540px;line-height:1.5}
+.hero .mais{position:absolute;right:-40px;bottom:-60px;width:320px;opacity:.07;pointer-events:none}
+
+/* Cartão principal */
+main{flex:1}
+.card{max-width:640px;margin:-84px auto 40px;background:#fff;border-radius:24px;box-shadow:0 20px 50px rgba(0,4,86,.12);padding:28px;position:relative;z-index:2}
+@media(max-width:680px){.card{margin:-84px 12px 32px;padding:22px 18px}}
+
+/* Passos */
+.passos{display:flex;gap:6px;margin-bottom:22px}
+.passos span{flex:1;height:4px;border-radius:4px;background:var(--borda);transition:background .3s}
+.passos span.on{background:var(--azul)}
+.rotulo-passo{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--azul);margin-bottom:6px}
+h2{font-size:24px;font-weight:800;letter-spacing:-.01em;line-height:1.2}
+.sub{color:var(--suave);margin-top:6px;line-height:1.5}
+
+/* Formulário */
+.campo{margin-top:18px}
+.campo label{display:block;font-weight:600;font-size:14px;margin-bottom:6px}
+.campo input{width:100%;height:52px;border:1.5px solid var(--borda);border-radius:12px;padding:0 16px;font-size:17px;background:#fff;transition:border-color .2s,box-shadow .2s}
+.campo input:focus{outline:none;border-color:var(--azul);box-shadow:0 0 0 4px rgba(0,13,151,.12)}
+.campo .dica{font-size:13px;color:var(--suave);margin-top:6px}
+.btn{width:100%;height:54px;border:0;border-radius:999px;background:var(--azul);color:#fff;font-weight:700;font-size:17px;cursor:pointer;margin-top:22px;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .2s,transform .1s}
+.btn:hover{background:var(--navy)}
+.btn:active{transform:scale(.99)}
+.btn:disabled{background:#B9BCD3;cursor:not-allowed}
+.btn.sec{background:#fff;color:var(--azul);border:1.5px solid var(--azul)}
+.btn.zap{background:#128C4B}
+.link{background:none;border:0;color:var(--azul);font-weight:600;cursor:pointer;margin-top:14px;display:block;width:100%;text-align:center;padding:8px}
+.alerta{margin-top:16px;padding:12px 14px;border-radius:12px;font-size:14px;line-height:1.45;display:none}
+.alerta.erro{display:block;background:#FDECEE;color:#A3121C}
+.alerta.info{display:block;background:#EEF0FF;color:var(--navy)}
+
+/* Parcelas */
+.resumo{display:flex;justify-content:space-between;align-items:flex-end;margin-top:18px;padding:16px 18px;border-radius:14px;background:linear-gradient(135deg,var(--navy),var(--azul));color:#fff}
+.resumo small{opacity:.75;font-size:13px}
+.resumo strong{font-size:26px;font-weight:800;display:block;letter-spacing:-.01em}
+.contrato{margin-top:18px}
+.contrato-cab{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--suave);margin-bottom:8px}
+.contrato-cab b{color:var(--tinta);font-size:14px}
+.marcar{background:none;border:0;color:var(--azul);font-weight:600;font-size:13px;cursor:pointer}
+.parcela{display:flex;align-items:center;gap:14px;padding:14px;border:1.5px solid var(--borda);border-radius:14px;margin-bottom:8px;cursor:pointer;transition:border-color .2s,background .2s;user-select:none}
+.parcela.sel{border-color:var(--azul);background:#F4F5FF}
+.parcela input{width:22px;height:22px;accent-color:var(--azul);flex-shrink:0}
+.parcela .info{flex:1;min-width:0}
+.parcela .n{font-weight:700}
+.parcela .v{font-size:13px;color:var(--suave);margin-top:2px}
+.parcela .atraso{display:inline-block;font-size:11px;font-weight:700;color:var(--vermelho);background:#FDECEE;border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:1px}
+.parcela .valor{font-weight:800;white-space:nowrap}
+.aviso-valor{font-size:13px;color:var(--suave);margin-top:10px;line-height:1.45}
+
+/* Datas */
+.datas{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px;margin-top:10px}
+.data{border:1.5px solid var(--borda);border-radius:12px;padding:10px 6px;text-align:center;cursor:pointer;background:#fff;transition:all .15s}
+.data small{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--suave);font-weight:600}
+.data b{display:block;font-size:20px;font-weight:800;margin-top:2px}
+.data span{display:block;font-size:11px;color:var(--suave)}
+.data.sel{background:var(--azul);border-color:var(--azul);color:#fff}
+.data.sel small,.data.sel span{color:rgba(255,255,255,.8)}
+
+/* Canal */
+.canais{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.canal{border:1.5px solid var(--borda);border-radius:14px;padding:16px 12px;text-align:center;cursor:pointer;background:#fff;font-weight:700;transition:all .15s}
+.canal svg{width:28px;height:28px;display:block;margin:0 auto 6px}
+.canal.sel{border-color:var(--azul);background:#F4F5FF;color:var(--azul)}
+
+/* Confirmação */
+.check{width:72px;height:72px;border-radius:50%;background:#E7F6EF;display:grid;place-items:center;margin:4px auto 16px}
+.check svg{width:38px;height:38px;color:var(--ok)}
+.centro{text-align:center}
+.protocolo{margin:20px 0 4px;padding:16px;border:1.5px dashed var(--borda);border-radius:14px;text-align:center}
+.protocolo small{color:var(--suave);font-size:13px}
+.protocolo b{display:block;font-size:24px;letter-spacing:.06em;margin-top:2px}
+.linhas{margin-top:14px;border-top:1px solid var(--borda)}
+.linhas div{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--borda);font-size:15px}
+.linhas span{color:var(--suave)}
+.linhas b{text-align:right}
+
+/* Rodapé */
+footer{background:var(--navy-2);color:rgba(255,255,255,.75);font-size:13px}
+footer .in{max-width:1080px;margin:auto;padding:28px 20px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between}
+footer svg{height:44px;width:auto}
+footer p{line-height:1.6}
+footer a{color:#fff}
+
+.oculto{display:none!important}
+.giro{width:20px;height:20px;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:g .8s linear infinite}
+@keyframes g{to{transform:rotate(360deg)}}
+.tela{animation:entra .35s ease}
+@keyframes entra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.demo{position:fixed;left:12px;bottom:12px;background:#FFF4D6;color:#7A5500;font-size:12px;font-weight:700;padding:6px 10px;border-radius:999px;z-index:9}
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="in">
+    <!-- Logo Banco Digi+ (versão escura) -->
+    <svg viewBox="0 0 159 58" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Banco Digi+">
+      <path d="M72.5335 0C75.1222 0 75.7072 1.74579 77.1858 11.459C77.9672 16.5992 78.3559 23.1814 78.3559 30.8977C78.3559 36.0946 77.9712 39.497 77.1979 41.1011C76.8092 41.9071 75.8515 42.2231 75.0701 41.8018C74.0282 41.2388 73.383 40.4206 73.1346 39.3431C73.0144 38.8206 73.0144 38.2738 73.0905 37.7431C73.2789 36.4146 73.9801 33.3888 73.9801 30.3873C73.9801 28.6456 73.9801 25.6563 73.7557 21.0913H73.0184H73.2708C70.8585 21.0913 68.0295 21.4315 66.2583 22.1161C62.3994 23.6067 59.915 27.4304 59.915 31.6025V32.8622C59.935 35.3695 61.045 36.7872 63.3091 36.7872C65.4208 36.7872 68.0094 34.8267 71.0709 30.9017L71.5478 30.3873C71.7722 30.1443 72.1649 30.201 72.3131 30.4926C72.4494 30.7559 72.4734 31.0638 72.3772 31.3432C70.2414 37.5892 67.0557 40.7122 62.8202 40.7122C59.923 40.7122 57.7712 39.1932 56.3646 36.1513C55.1585 33.5387 54.9141 30.5858 55.4991 27.7666C56.8175 21.4113 62.4034 17.0974 67.5687 16.6964C70.7704 16.4493 73.2348 17.1946 73.2348 17.1946C72.9903 9.7254 71.0709 2.95286 71.0709 2.95286L70.9707 2.04148C70.8585 1.0491 71.5518 0.149871 72.5255 0.0121517" fill="#171B3D"/>
+      <path d="M85.5408 19.2847C86.0256 19.3171 86.4945 19.5116 86.827 19.8721C87.5203 20.6295 87.8048 21.9541 87.6886 23.8416L87.344 29.3666C87.2558 30.764 87.2799 32.1736 87.4361 33.567C87.6685 35.6166 88.0613 36.6738 89.3155 36.7184L91.4233 36.852L91.868 36.8804C92.3329 36.9087 92.6815 37.3138 92.6535 37.7796C92.6254 38.2292 92.4491 38.6545 92.1526 38.9907C91.5034 39.732 90.6138 40.4246 89.4878 41.0687C88.9028 41.4049 88.2296 41.5628 87.5564 41.5183C84.7754 41.34 83.8858 38.7193 82.9121 33.6521C82.5875 31.967 82.4352 30.2496 82.4112 28.5322L82.347 23.9226C82.5514 20.6619 82.9561 19.1106 85.5408 19.2766" fill="#171B3D"/>
+      <path d="M122.447 19.2847C122.932 19.3171 123.4 19.5116 123.733 19.8721C124.426 20.6295 124.711 21.9541 124.595 23.8416L124.25 29.3666C124.162 30.764 124.182 32.1736 124.342 33.567C124.575 35.6166 124.967 36.6738 126.221 36.7184L128.329 36.852L128.774 36.8804C129.235 36.9087 129.588 37.3138 129.559 37.7796C129.531 38.2292 129.355 38.6545 129.059 38.9907C128.405 39.732 127.52 40.4246 126.394 41.0687C125.809 41.4049 125.136 41.5628 124.462 41.5183C121.681 41.34 120.792 38.7193 119.818 33.6521C119.493 31.967 119.341 30.2496 119.317 28.5322L119.253 23.9226C119.457 20.6619 119.862 19.1106 122.447 19.2766" fill="#171B3D"/>
+      <path d="M99.606 32.1291L99.622 32.283C99.7542 33.486 100.736 34.4095 101.93 34.4622C104.731 34.4622 109.215 30.3873 110.201 25.6563C110.509 24.1738 110.341 22.8614 109.892 21.8366C109.888 21.8244 109.884 21.8163 109.876 21.8042C109.612 21.2128 108.899 20.9819 108.326 21.2776C103.176 23.9145 99.606 28.0501 99.606 32.1331M110.149 15.3435C111.643 14.8413 113.302 15.542 113.936 17.0002C115.31 20.1596 115.999 26.7985 115.999 36.9128V38.3831C115.999 47.8047 113.174 54.075 107.528 57.1858C106.554 57.7205 105.464 58 104.358 58C101.501 58 99.4056 56.1124 98.0752 52.3292C97.7346 51.3652 97.5463 50.3566 97.4822 49.3359C97.4341 48.5622 98.1153 47.9465 98.8727 48.0802C99.2614 48.149 99.5419 48.4285 99.7903 48.7404C100.84 50.0609 101.561 51.191 103.044 52.4345C103.549 52.8598 104.186 53.0988 104.843 53.0988C106.759 53.0988 108.358 51.4462 109.64 48.1328C110.682 45.4473 111.143 42.5674 111.082 39.6834L110.938 32.8784C110.938 32.8784 106.009 39.6023 99.9907 39.3674C96.4363 39.2297 93.8837 35.9933 95.17 30.1402C96.244 25.2512 98.492 21.8406 102.96 18.8068C105.04 17.3972 107.312 16.3035 109.684 15.5015L110.145 15.3476L110.149 15.3435Z" fill="#171B3D"/>
+      <path d="M146.181 9.23124H146.417C147.147 9.23124 147.856 9.57554 148.257 10.1953C148.289 10.2439 148.317 10.2925 148.345 10.3451C148.866 11.3132 149.074 12.4231 148.998 13.5248L148.633 17.9359L148.433 20.7389C148.409 21.0953 148.702 21.391 149.054 21.3586C150.204 21.2574 152.817 21.0548 156.724 20.8645C157.99 20.8037 159.04 21.8528 158.996 23.1368C158.956 24.2386 158.235 25.2026 157.189 25.5266C155.754 25.9682 153.41 26.2882 149.904 26.7702C149.435 26.835 149.086 27.24 149.086 27.714V29.3342C149.086 35.5437 148.437 38.6505 147.147 38.6505H146.942C146.333 38.6505 145.732 38.4439 145.283 38.0226C143.937 36.7508 143.264 34.3447 143.264 30.8005L143.22 28.3742C143.212 27.9651 142.863 27.6491 142.458 27.6815C142.062 27.7139 141.497 27.7788 140.743 27.8841C138.047 28.2729 135.286 28.7995 132.949 28.8319C132.705 28.8319 132.461 28.8076 132.22 28.759L132.092 28.7306C131.122 28.5322 130.457 27.6289 130.541 26.6325L130.613 25.6927C130.633 25.4173 130.709 25.1459 130.838 24.8988C131.086 24.4208 131.447 23.9186 132.396 23.7323C134.087 23.3961 134.58 23.3961 136.652 23.1125L140.739 22.6507C142.711 22.4037 143.26 22.4563 143.26 20.4958V12.1598C143.26 10.5355 144.562 9.21909 146.169 9.21909" fill="#E62A36"/>
+      <path d="M3.06548 28.2689H1.19013V30.687H3.06548C3.89095 30.687 4.35578 30.1726 4.35578 29.4719C4.35578 28.7711 3.89095 28.2689 3.06548 28.2689ZM2.95327 24.915H1.19013V27.1874H2.95327C3.71463 27.1874 4.23156 26.7864 4.23156 26.0492C4.23156 25.312 3.71463 24.9109 2.95327 24.9109M3.17367 31.7685H0V23.8335H3.05345C4.50805 23.8335 5.42168 24.6679 5.42168 26.0046C5.42168 26.8633 4.89274 27.475 4.36379 27.6856C4.96888 27.9327 5.5419 28.52 5.5419 29.5245C5.5419 30.9868 4.56015 31.7645 3.17367 31.7645" fill="#171B3D"/>
+      <path d="M11.8411 25.6279L10.6189 29.1478H13.0313L11.8411 25.6279ZM13.9008 31.7685L13.3598 30.1767H10.2623L9.72134 31.7685H8.45508L11.3322 23.8335H12.2899L15.1671 31.7685H13.9008Z" fill="#171B3D"/>
+      <path d="M23.1854 31.7686L19.5589 26.1869V31.7686H18.3688V23.8376H19.4587L23.0852 29.4071V23.8376H24.2753V31.7686H23.1854Z" fill="#171B3D"/>
+      <path d="M30.9473 31.8374C30.1298 31.8374 29.4245 31.5377 28.8876 30.9909C28.1182 30.2091 28.1262 29.3301 28.1262 27.8031C28.1262 26.276 28.1142 25.397 28.8876 24.6153C29.4286 24.0684 30.1338 23.7687 30.9473 23.7687C32.3898 23.7687 33.4718 24.6274 33.7483 26.2071H32.5341C32.3458 25.4051 31.8168 24.8462 30.9473 24.8462C30.4824 24.8462 30.0657 25.0244 29.7892 25.3241C29.4045 25.7454 29.3164 26.2031 29.3164 27.799C29.3164 29.3949 29.4045 29.8486 29.7892 30.2739C30.0657 30.5737 30.4824 30.7519 30.9473 30.7519C31.8168 30.7519 32.3578 30.1929 32.5461 29.3909H33.7483C33.4838 30.9747 32.3698 31.8293 30.9473 31.8293" fill="#171B3D"/>
+      <path d="M41.1215 25.3403C40.845 25.0406 40.4162 24.8502 39.9514 24.8502C39.4866 24.8502 39.0578 25.0406 38.7813 25.3403C38.3966 25.7616 38.3165 26.2112 38.3165 27.8031C38.3165 29.3949 38.3926 29.8405 38.7813 30.2658C39.0578 30.5656 39.4866 30.7559 39.9514 30.7559C40.4162 30.7559 40.845 30.5656 41.1215 30.2658C41.5062 29.8446 41.5863 29.3949 41.5863 27.8031C41.5863 26.2112 41.5102 25.7656 41.1215 25.3403ZM42.0231 30.9909C41.4822 31.5377 40.7889 31.8374 39.9514 31.8374C39.1139 31.8374 38.4287 31.5377 37.8917 30.9909C37.1184 30.2091 37.1304 29.3301 37.1304 27.8031C37.1304 26.276 37.1184 25.397 37.8917 24.6153C38.4327 24.0684 39.1139 23.7687 39.9514 23.7687C40.7889 23.7687 41.4822 24.0684 42.0231 24.6153C42.7965 25.397 42.7725 26.276 42.7725 27.8031C42.7725 29.3301 42.7965 30.2091 42.0231 30.9909Z" fill="#171B3D"/>
+    </svg>
+    <div class="selo">Assessoria de cobrança autorizada<br><b>Maxiserv</b></div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="in">
+    <h1>Coloque suas parcelas em dia com o Digi<em>+</em></h1>
+    <p>Consulte as parcelas em atraso, escolha a melhor data para pagar e receba o boleto no WhatsApp ou no e-mail.</p>
+  </div>
+  <svg class="mais" viewBox="125 9 34 30" aria-hidden="true"><path fill="#fff" d="M146.181 9.23124H146.417C147.147 9.23124 147.856 9.57554 148.257 10.1953C148.289 10.2439 148.317 10.2925 148.345 10.3451C148.866 11.3132 149.074 12.4231 148.998 13.5248L148.633 17.9359L148.433 20.7389C148.409 21.0953 148.702 21.391 149.054 21.3586C150.204 21.2574 152.817 21.0548 156.724 20.8645C157.99 20.8037 159.04 21.8528 158.996 23.1368C158.956 24.2386 158.235 25.2026 157.189 25.5266C155.754 25.9682 153.41 26.2882 149.904 26.7702C149.435 26.835 149.086 27.24 149.086 27.714V29.3342C149.086 35.5437 148.437 38.6505 147.147 38.6505H146.942C146.333 38.6505 145.732 38.4439 145.283 38.0226C143.937 36.7508 143.264 34.3447 143.264 30.8005L143.22 28.3742C143.212 27.9651 142.863 27.6491 142.458 27.6815C142.062 27.7139 141.497 27.7788 140.743 27.8841C138.047 28.2729 135.286 28.7995 132.949 28.8319C132.705 28.8319 132.461 28.8076 132.22 28.759L132.092 28.7306C131.122 28.5322 130.457 27.6289 130.541 26.6325L130.613 25.6927C130.633 25.4173 130.709 25.1459 130.838 24.8988C131.086 24.4208 131.447 23.9186 132.396 23.7323C134.087 23.3961 134.58 23.3961 136.652 23.1125L140.739 22.6507C142.711 22.4037 143.26 22.4563 143.26 20.4958V12.1598C143.26 10.5355 144.562 9.21909 146.169 9.21909"/></svg>
+</section>
+
+<main>
+  <div class="card">
+    <div class="passos"><span class="on"></span><span></span><span></span><span></span></div>
+
+    <!-- 1. Identificação -->
+    <section id="t-login" class="tela">
+      <div class="rotulo-passo">Passo 1 de 4</div>
+      <h2>Identifique-se</h2>
+      <p class="sub">Use o CPF do titular do contrato.</p>
+      <form id="f-login" novalidate>
+        <div class="campo">
+          <label for="cpf">CPF</label>
+          <input id="cpf" inputmode="numeric" autocomplete="off" placeholder="000.000.000-00" maxlength="14">
+        </div>
+        <div class="campo" id="campo-chave">
+          <label for="chave" id="lbl-chave">Data de nascimento</label>
+          <input id="chave" placeholder="DD/MM/AAAA" inputmode="numeric" maxlength="10" autocomplete="bday">
+          <div class="dica" id="dica-chave">Para confirmar que é você.</div>
+        </div>
+        <div id="turnstile" style="margin-top:16px"></div>
+        <div class="alerta" id="a-login"></div>
+        <button class="btn" id="b-login" type="submit">Consultar parcelas</button>
+      </form>
+      <div id="bloco-equipe" class="oculto">
+        <div class="alerta erro" style="display:block">Não conseguimos confirmar seus dados. Nossa equipe resolve isso com você pelo WhatsApp.</div>
+        <a class="btn zap" id="zap-equipe" target="_blank" rel="noopener">Falar com nossa equipe</a>
+        <button class="link" onclick="voltarLogin()">Tentar novamente</button>
+      </div>
+    </section>
+
+    <!-- 2. Parcelas -->
+    <section id="t-parcelas" class="tela oculto">
+      <div class="rotulo-passo">Passo 2 de 4</div>
+      <h2 id="ola">Olá</h2>
+      <p class="sub">Selecione as parcelas que você quer pagar.</p>
+      <div class="alerta info" id="a-pendente" style="display:none"></div>
+      <div id="lista"></div>
+      <div class="resumo">
+        <div><small id="qtd-sel">0 parcelas selecionadas</small><strong id="total-sel">R$ 0,00</strong></div>
+      </div>
+      <p class="aviso-valor">Os valores mostrados são os das parcelas originais. O valor atualizado para a data escolhida virá no boleto emitido pelo Banco Digi+.</p>
+      <button class="btn" id="b-parcelas">Continuar</button>
+      <button class="link" onclick="sair()">Sair</button>
+    </section>
+
+    <!-- 3. Data e canal -->
+    <section id="t-envio" class="tela oculto">
+      <div class="rotulo-passo">Passo 3 de 4</div>
+      <h2>Quando você vai pagar?</h2>
+      <p class="sub">Escolha a data de vencimento do boleto.</p>
+      <div class="datas" id="datas"></div>
+
+      <h2 style="margin-top:28px;font-size:20px">Como quer receber o boleto?</h2>
+      <div class="canais">
+        <div class="canal" data-canal="whatsapp" role="button" tabindex="0">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+          WhatsApp
+        </div>
+        <div class="canal" data-canal="email" role="button" tabindex="0">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          E-mail
+        </div>
+      </div>
+      <div class="campo oculto" id="campo-destino">
+        <label for="destino" id="lbl-destino">Celular com WhatsApp</label>
+        <input id="destino">
+        <div class="dica" id="dica-destino">Confira se está certo — é para lá que o boleto vai.</div>
+      </div>
+      <div class="alerta" id="a-envio"></div>
+      <button class="btn" id="b-envio" disabled>Revisar pedido</button>
+      <button class="link" onclick="ir('parcelas')">Voltar</button>
+    </section>
+
+    <!-- 4. Revisão e confirmação -->
+    <section id="t-revisao" class="tela oculto">
+      <div class="rotulo-passo">Passo 4 de 4</div>
+      <h2>Confira seu pedido</h2>
+      <div class="linhas" id="linhas-rev"></div>
+      <div class="alerta" id="a-rev"></div>
+      <button class="btn" id="b-confirmar">Confirmar e solicitar boleto</button>
+      <button class="link" onclick="ir('envio')">Alterar</button>
+    </section>
+
+    <section id="t-ok" class="tela oculto centro">
+      <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h2>Pedido recebido!</h2>
+      <p class="sub" id="ok-msg"></p>
+      <div class="protocolo"><small>Seu protocolo</small><b id="ok-prot"></b></div>
+      <div class="linhas" id="linhas-ok" style="text-align:left"></div>
+      <p class="aviso-valor" style="margin-top:16px">Pague até a data escolhida para manter o pedido. Se tiver qualquer dúvida, fale com a gente informando o protocolo.</p>
+      <a class="btn sec" id="zap-ok" target="_blank" rel="noopener">Falar com nossa equipe</a>
+    </section>
+
+    <!-- Sem parcelas -->
+    <section id="t-vazio" class="tela oculto centro">
+      <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h2>Nenhuma parcela em atraso</h2>
+      <p class="sub">Não encontramos parcelas vencidas em aberto para este CPF. Se você acha que há algo errado, fale com nossa equipe.</p>
+      <a class="btn sec" id="zap-vazio" target="_blank" rel="noopener">Falar com nossa equipe</a>
+      <button class="link" onclick="sair()">Voltar ao início</button>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="in">
+    <svg viewBox="0 0 172 95" fill="none" aria-hidden="true"><path d="M28.7187 0C33.0082 0 33.9777 2.85949 36.4279 18.7691C37.7228 27.1884 38.3669 37.9695 38.3669 50.6083C38.3669 59.1204 37.7294 64.6934 36.4478 67.3207C35.8038 68.641 34.2168 69.1585 32.9219 68.4685C31.1955 67.5463 30.1264 66.2061 29.7147 64.4413C29.5155 63.5854 29.5155 62.6898 29.6417 61.8207C29.9538 59.6445 31.1158 54.6885 31.1158 49.7723C31.1158 46.9195 31.1158 42.0232 30.744 34.5461H29.5222H29.9405C25.9431 34.5461 21.2552 35.1034 18.3202 36.2246C11.9257 38.6661 7.80885 44.9291 7.80885 51.7627V53.826C7.84205 57.9328 9.68137 60.2549 13.4331 60.2549C16.9324 60.2549 21.222 57.0438 26.295 50.6149L27.0852 49.7723C27.4571 49.3743 28.1078 49.4671 28.3535 49.9448C28.5793 50.3761 28.6191 50.8803 28.4597 51.3381C24.9205 61.5685 19.6416 66.6838 12.623 66.6838C7.82213 66.6838 4.25637 64.1958 1.92567 59.2133C-0.0730152 54.934 -0.478065 50.0974 0.491398 45.4798C2.67601 35.0702 11.9324 28.0044 20.4916 27.3476C25.797 26.9429 29.8807 28.1636 29.8807 28.1636C29.4757 15.9295 26.295 4.83658 26.295 4.83658L26.129 3.34381C25.9431 1.71835 27.0919 0.245478 28.7054 0.0199036" fill="white"/><path d="M50.2727 31.5872C51.0761 31.6403 51.853 31.9587 52.4042 32.5492C53.5529 33.7899 54.0244 35.9594 53.8318 39.0511L53.2607 48.1006C53.1147 50.3895 53.1545 52.6983 53.4135 54.9806C53.7986 58.3377 54.4493 60.0693 56.5277 60.1423L60.0204 60.3612L60.7575 60.4076C61.5277 60.4541 62.1054 61.1175 62.059 61.8805C62.0125 62.6169 61.7203 63.3136 61.2289 63.8642C60.1532 65.0784 58.6791 66.2129 56.8132 67.2678C55.8438 67.8184 54.7282 68.0772 53.6127 68.0042C49.0044 67.7123 47.5303 63.4197 45.9167 55.1199C45.3789 52.3599 45.1266 49.5469 45.0867 46.7339L44.9805 39.1837C45.3191 33.8429 45.9898 31.3019 50.2727 31.5739" fill="white"/><path d="M111.422 31.5872C112.225 31.6403 113.002 31.9587 113.553 32.5492C114.702 33.7899 115.174 35.9594 114.981 39.0511L114.41 48.1006C114.264 50.3895 114.297 52.6983 114.563 54.9806C114.948 58.3377 115.599 60.0693 117.677 60.1423L121.17 60.3612L121.907 60.4076C122.67 60.4541 123.255 61.1175 123.208 61.8805C123.162 62.6169 122.869 63.3136 122.378 63.8642C121.296 65.0784 119.828 66.2129 117.962 67.2678C116.993 67.8184 115.877 68.0772 114.762 68.0042C110.154 67.7123 108.679 63.4197 107.066 55.1199C106.528 52.3599 106.276 49.5469 106.236 46.7339L106.13 39.1837C106.468 33.8429 107.139 31.3019 111.422 31.5739" fill="white"/><path d="M73.573 52.6254L73.5995 52.8775C73.8186 54.848 75.4455 56.3606 77.4242 56.4469C82.0657 56.4469 89.4961 49.7725 91.1295 42.0234C91.6408 39.5952 91.3619 37.4456 90.6182 35.767C90.6116 35.7471 90.6049 35.7339 90.5917 35.7139C90.1534 34.7453 88.9715 34.3671 88.0219 34.8515C79.4893 39.1705 73.573 45.9444 73.573 52.632M91.0498 25.1319C93.5266 24.3092 96.2757 25.4569 97.3248 27.8454C99.6024 33.0203 100.744 43.8943 100.744 60.4608V62.8691C100.744 78.3011 96.0632 88.5713 86.7072 93.6667C85.0936 94.5424 83.2875 95.0002 81.4548 95.0002C76.7204 95.0002 73.2476 91.9085 71.0431 85.7119C70.4786 84.1328 70.1666 82.4808 70.0603 80.8089C69.9806 79.5417 71.1095 78.5333 72.3644 78.7522C73.0085 78.865 73.4733 79.3228 73.885 79.8337C75.6248 81.9965 76.82 83.8475 79.2768 85.8843C80.1135 86.581 81.1693 86.9724 82.2583 86.9724C85.4323 86.9724 88.0817 84.2655 90.2065 78.8385C91.933 74.4398 92.6966 69.7226 92.597 64.9988L92.358 53.8528C92.358 53.8528 84.1906 64.8661 74.217 64.4813C68.3272 64.2557 64.0974 58.9547 66.2289 49.3678C68.0085 41.3599 71.7336 35.7737 79.1374 30.8044C82.5836 28.4956 86.3486 26.7042 90.2796 25.3906L91.0432 25.1385L91.0498 25.1319Z" fill="white"/><path d="M150.758 15.12H151.15C152.358 15.12 153.534 15.6839 154.198 16.699C154.251 16.7786 154.297 16.8583 154.344 16.9445C155.207 18.5302 155.552 20.348 155.426 22.1526L154.822 29.3776L154.49 33.9687C154.45 34.5526 154.935 35.0369 155.519 34.9838C157.425 34.818 161.754 34.4862 168.228 34.1744C170.327 34.0749 172.066 35.7932 171.993 37.8964C171.927 39.701 170.732 41.28 168.999 41.8108C166.621 42.5339 162.737 43.0581 156.927 43.8476C156.15 43.9537 155.572 44.6172 155.572 45.3934V48.0472C155.572 58.218 154.497 63.3067 152.358 63.3067H152.02C151.01 63.3067 150.014 62.9683 149.271 62.2783C147.04 60.1951 145.924 56.2542 145.924 50.4489L145.851 46.4748C145.838 45.8048 145.26 45.2873 144.589 45.3403C143.932 45.3934 142.996 45.4996 141.747 45.6721C137.279 46.309 132.704 47.1715 128.832 47.2245C128.427 47.2245 128.022 47.1847 127.624 47.1051L127.411 47.0587C125.804 46.7336 124.702 45.2541 124.842 43.622L124.961 42.0828C124.994 41.6316 125.12 41.1871 125.333 40.7824C125.745 39.9995 126.342 39.1768 127.916 38.8717C130.718 38.321 131.535 38.321 134.968 37.8566L141.741 37.1002C145.008 36.6955 145.917 36.7818 145.917 33.5707V19.9168C145.917 17.2563 148.076 15.1001 150.738 15.1001" fill="#E62A36"/></svg>
+    <p>Atendimento feito pela <b style="color:#fff">Maxiserv Assessoria de Cobrança</b>, empresa autorizada pelo Banco Digi+.<br>
+      Dúvidas: <a id="zap-rodape" target="_blank" rel="noopener">WhatsApp</a> · <span id="tel-rodape"></span></p>
+  </div>
+</footer>
+
+<script>
+/* ======== Configuração ======== */
+const CONFIG = {
+  api: '/api/dg',
+  chave: 'nascimento',          // 'nascimento' ou 'email' — igual a DG_CHAVE_VALIDACAO
+  whatsappEquipe: '555133011705', // >>> CONFIRMAR número da equipe Digimais
+  telefone: '0800 000 3232',     // >>> CONFIRMAR
+  turnstileSiteKey: '0x4AAAAAAFyBYwDP3o62iZQ3', // mesmo widget da FLEX
+};
+// Modo demonstração: abre localmente (file://) ou com ?demo=1
+const DEMO = location.protocol === 'file:' || new URLSearchParams(location.search).has('demo')
+  || /claudeusercontent|localhost|127\.0\.0\.1/.test(location.hostname);
+
+/* ======== Estado ======== */
+const S = { token:null, nome:'', email:'', telefone:'', hoje:'', prazo:10, parcelas:[], sel:new Set(), data:null, canal:null, falhas:0 };
+
+const $ = (s) => document.querySelector(s);
+const brl = (v) => Number(v).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const dBR = (iso) => iso.split('-').reverse().join('/');
+const digitos = (s) => String(s||'').replace(/\D/g,'');
+const chaveP = (p) => `${p.contrato}#${p.parcela}`;
+const diasEntre = (a,b) => Math.round((new Date(b+'T12:00:00Z') - new Date(a+'T12:00:00Z'))/864e5);
+
+/* ======== Links de contato ======== */
+function linkZap(texto){ return `https://wa.me/${CONFIG.whatsappEquipe}?text=${encodeURIComponent(texto)}`; }
+function atualizarLinks(prot){
+  const base = 'Olá! Vim pelo portal Digi+ e preciso de ajuda' + (prot ? ` (protocolo ${prot}).` : '.');
+  ['#zap-equipe','#zap-ok','#zap-vazio','#zap-rodape'].forEach(id => $(id).href = linkZap(base));
+}
+$('#tel-rodape').textContent = CONFIG.telefone;
+atualizarLinks();
+
+/* ======== Navegação ======== */
+const TELAS = ['login','parcelas','envio','revisao','ok','vazio'];
+const PASSO = {login:1,parcelas:2,envio:3,revisao:4,ok:4,vazio:2};
+function ir(t){
+  TELAS.forEach(n => $('#t-'+n).classList.toggle('oculto', n!==t));
+  document.querySelectorAll('.passos span').forEach((s,i)=>s.classList.toggle('on', i < PASSO[t]));
+  if (window.innerWidth < 680) $('.card').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function sair(){ Object.assign(S,{token:null,parcelas:[],sel:new Set(),data:null,canal:null}); $('#f-login').reset(); voltarLogin(); }
+function voltarLogin(){ $('#f-login').classList.remove('oculto'); $('#bloco-equipe').classList.add('oculto'); alerta('#a-login'); ir('login'); }
+function alerta(id,msg,tipo='erro'){ const a=$(id); a.className='alerta'+(msg?' '+tipo:''); a.textContent=msg||''; }
+function carregando(btn,on,txt){ btn.disabled=on; btn.innerHTML = on ? '<span class="giro"></span>' : txt; }
+
+/* ======== Passo 1 ======== */
+if (CONFIG.chave === 'email'){
+  $('#lbl-chave').textContent = 'E-mail cadastrado';
+  Object.assign($('#chave'), {placeholder:'seu@email.com', inputMode:'email', maxLength:120, autocomplete:'email', type:'email'});
+  $('#dica-chave').textContent = 'O e-mail que você informou ao Banco Digi+.';
+}
+$('#cpf').addEventListener('input', e=>{
+  let v = digitos(e.target.value).slice(0,11);
+  v = v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2');
+  e.target.value = v;
+});
+if (CONFIG.chave === 'nascimento') $('#chave').addEventListener('input', e=>{
+  let v = digitos(e.target.value).slice(0,8);
+  v = v.replace(/(\d{2})(\d)/,'$1/$2').replace(/(\d{2})(\d)/,'$1/$2');
+  e.target.value = v;
+});
+function cpfValido(c){ c=digitos(c); if(c.length!==11||/^(\d)\1{10}$/.test(c))return false;
+  for(const n of [9,10]){let s=0;for(let i=0;i<n;i++)s+=+c[i]*(n+1-i); if(((s*10)%11)%10!==+c[n])return false;} return true; }
+
+let turnstileToken = '';
+if (CONFIG.turnstileSiteKey && !DEMO){
+  window.onTs = () => turnstile.render('#turnstile',{sitekey:CONFIG.turnstileSiteKey, language:'pt-br', callback:t=>turnstileToken=t, 'expired-callback':()=>turnstileToken=''});
+  const s=document.createElement('script'); s.src='https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTs'; s.async=true; document.head.appendChild(s);
+}
+
+$('#f-login').addEventListener('submit', async e=>{
+  e.preventDefault(); alerta('#a-login');
+  const cpf = digitos($('#cpf').value);
+  if (!cpfValido(cpf)) return alerta('#a-login','Confira o CPF digitado.');
+  let chave = $('#chave').value.trim();
+  if (CONFIG.chave === 'nascimento'){
+    const m = chave.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+    if (!m) return alerta('#a-login','Informe a data de nascimento no formato DD/MM/AAAA.');
+    chave = `${m[3]}-${m[2]}-${m[1]}`;
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(chave)) return alerta('#a-login','Informe um e-mail válido.');
+  if (CONFIG.turnstileSiteKey && !DEMO && !turnstileToken) return alerta('#a-login','Aguarde a verificação de segurança terminar e tente de novo.');
+
+  const b = $('#b-login'); carregando(b,true);
+  try{
+    const r = await api('consultar',{cpf,chave,turnstile:turnstileToken});
+    S.falhas = 0;
+    Object.assign(S,{token:r.token,nome:r.nome,email:r.email,telefone:r.telefone,hoje:r.hoje,prazo:r.prazoMaxDias,parcelas:r.parcelas});
+    S.sel = new Set(r.parcelas.map(chaveP));
+    if (!r.parcelas.length) return ir('vazio');
+    montarParcelas(r.pendente); ir('parcelas');
+  }catch(err){
+    if (err.status === 401 || err.bloqueado){
+      S.falhas++;
+      if (S.falhas >= 2 || err.bloqueado){ $('#f-login').classList.add('oculto'); $('#bloco-equipe').classList.remove('oculto'); }
+      else alerta('#a-login','Os dados não conferem com o cadastro. Confira e tente de novo.');
+    } else if (err.naoEncontrado) ir('vazio');
+    else alerta('#a-login', err.message);
+  } finally { carregando(b,false,'Consultar parcelas'); if (window.turnstile && CONFIG.turnstileSiteKey && !DEMO){ turnstile.reset(); turnstileToken=''; } }
+});
+
+/* ======== Passo 2 ======== */
+function montarParcelas(pendente){
+  const primeiro = (S.nome||'').trim().split(/\s+/)[0] || '';
+  $('#ola').textContent = `Olá, ${primeiro.charAt(0)+primeiro.slice(1).toLowerCase()}`;
+  if (pendente){
+    const a=$('#a-pendente'); a.style.display='block';
+    a.textContent = `Você já tem um pedido em andamento (protocolo ${pendente.protocolo}, pagamento em ${dBR(pendente.data_pagamento)}). Se fizer um novo pedido, consideraremos o mais recente.`;
+  }
+  const grupos = {};
+  S.parcelas.forEach(p => (grupos[p.contrato] ||= []).push(p));
+  $('#lista').innerHTML = Object.entries(grupos).map(([ct,ps]) => `
+    <div class="contrato">
+      <div class="contrato-cab"><span><b>Contrato ${ct}</b>${ps[0].produto ? ' · '+ps[0].produto : ''}</span>
+        ${ps.length>1?`<button class="marcar" data-ct="${ct}">Desmarcar todas</button>`:''}</div>
+      ${ps.map(p=>{ const d=diasEntre(p.vencimento,S.hoje); return `
+        <label class="parcela" data-k="${chaveP(p)}">
+          <input type="checkbox" checked>
+          <div class="info"><div class="n">Parcela ${p.parcela}<span class="atraso">${d} dia${d>1?'s':''} em atraso</span></div>
+            <div class="v">Venceu em ${dBR(p.vencimento)}</div></div>
+          <div class="valor">${brl(p.valor)}</div>
+        </label>`}).join('')}
+    </div>`).join('');
+  document.querySelectorAll('.parcela input').forEach(cb=>cb.addEventListener('change',e=>{
+    const k=e.target.closest('.parcela').dataset.k; e.target.checked?S.sel.add(k):S.sel.delete(k); totalizar();
+  }));
+  document.querySelectorAll('.marcar').forEach(b=>b.addEventListener('click',e=>{
+    e.preventDefault(); const ct=b.dataset.ct; const ps=S.parcelas.filter(p=>p.contrato===ct);
+    const todas=ps.every(p=>S.sel.has(chaveP(p)));
+    ps.forEach(p=>todas?S.sel.delete(chaveP(p)):S.sel.add(chaveP(p)));
+    document.querySelectorAll(`.parcela`).forEach(el=>{ if(el.dataset.k.startsWith(ct+'#')) el.querySelector('input').checked=!todas; });
+    totalizar();
+  }));
+  totalizar();
+}
+function selecionadas(){ return S.parcelas.filter(p=>S.sel.has(chaveP(p))); }
+function totalizar(){
+  const sel = selecionadas();
+  document.querySelectorAll('.parcela').forEach(el=>el.classList.toggle('sel',S.sel.has(el.dataset.k)));
+  document.querySelectorAll('.marcar').forEach(b=>{ const ps=S.parcelas.filter(p=>p.contrato===b.dataset.ct);
+    b.textContent = ps.every(p=>S.sel.has(chaveP(p))) ? 'Desmarcar todas' : 'Marcar todas'; });
+  $('#qtd-sel').textContent = `${sel.length} parcela${sel.length!==1?'s':''} selecionada${sel.length!==1?'s':''}`;
+  $('#total-sel').textContent = brl(sel.reduce((s,p)=>s+Number(p.valor),0));
+  $('#b-parcelas').disabled = !sel.length;
+}
+$('#b-parcelas').addEventListener('click',()=>{ montarDatas(); ir('envio'); });
+
+/* ======== Passo 3 ======== */
+const DIAS=['dom','seg','ter','qua','qui','sex','sáb'], MESES=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+function montarDatas(){
+  const out=[];
+  for(let i=0;i<=S.prazo;i++){
+    const d=new Date(S.hoje+'T12:00:00Z'); d.setUTCDate(d.getUTCDate()+i);
+    const dw=d.getUTCDay(); if(dw===0||dw===6) continue;
+    const iso=d.toISOString().slice(0,10);
+    out.push(`<div class="data${S.data===iso?' sel':''}" data-d="${iso}" role="button" tabindex="0">
+      <small>${i===0?'hoje':i===1?'amanhã':DIAS[dw]}</small><b>${d.getUTCDate()}</b><span>${MESES[d.getUTCMonth()]}</span></div>`);
+  }
+  $('#datas').innerHTML = out.join('');
+  document.querySelectorAll('.data').forEach(el=>el.addEventListener('click',()=>{
+    S.data=el.dataset.d; document.querySelectorAll('.data').forEach(x=>x.classList.toggle('sel',x===el)); validarEnvio();
+  }));
+}
+document.querySelectorAll('.canal').forEach(el=>el.addEventListener('click',()=>{
+  S.canal=el.dataset.canal; document.querySelectorAll('.canal').forEach(x=>x.classList.toggle('sel',x===el));
+  const inp=$('#destino'); $('#campo-destino').classList.remove('oculto'); alerta('#a-envio');
+  if(S.canal==='whatsapp'){
+    $('#lbl-destino').textContent='Celular com WhatsApp';
+    Object.assign(inp,{type:'tel',inputMode:'numeric',placeholder:'(51) 99999-9999',autocomplete:'tel'});
+    inp.value = mascTel(S.telefone);
+  } else {
+    $('#lbl-destino').textContent='E-mail';
+    Object.assign(inp,{type:'email',inputMode:'email',placeholder:'seu@email.com',autocomplete:'email'});
+    inp.value = S.email;
+  }
+  validarEnvio(); inp.focus();
+}));
+function mascTel(v){ v=digitos(v); if(v.startsWith('55')&&v.length>11)v=v.slice(2); v=v.slice(0,11);
+  return v.replace(/^(\d{2})(\d)/,'($1) $2').replace(/(\d{5})(\d{1,4})$/,'$1-$2'); }
+$('#destino').addEventListener('input',e=>{ if(S.canal==='whatsapp') e.target.value=mascTel(e.target.value); validarEnvio(); });
+function destinoOk(){ const v=$('#destino').value.trim();
+  return S.canal==='whatsapp' ? /^\d{2}9\d{8}$/.test(digitos(v)) : /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+function validarEnvio(){ $('#b-envio').disabled = !(S.data && S.canal && destinoOk()); }
+$('#b-envio').addEventListener('click',()=>{
+  const sel=selecionadas();
+  $('#linhas-rev').innerHTML = resumoHTML(sel, $('#destino').value.trim());
+  alerta('#a-rev'); ir('revisao');
+});
+function resumoHTML(sel,destino){
+  const cts=[...new Set(sel.map(p=>p.contrato))];
+  return `
+    <div><span>Parcelas</span><b>${sel.length} (${cts.length>1?'contratos '+cts.join(', '):'contrato '+cts[0]})</b></div>
+    <div><span>Valor original</span><b>${brl(sel.reduce((s,p)=>s+Number(p.valor),0))}</b></div>
+    <div><span>Data de pagamento</span><b>${dBR(S.data)}</b></div>
+    <div><span>Receber por</span><b>${S.canal==='whatsapp'?'WhatsApp':'E-mail'}<br><span style="font-weight:500">${destino}</span></b></div>`;
+}
+
+/* ======== Passo 4 ======== */
+$('#b-confirmar').addEventListener('click', async ()=>{
+  const b=$('#b-confirmar'); carregando(b,true); alerta('#a-rev');
+  const sel=selecionadas(), destino=$('#destino').value.trim();
+  try{
+    const r = await api('solicitar',{ token:S.token, parcelas:sel.map(p=>({contrato:p.contrato,parcela:p.parcela})),
+      dataPagamento:S.data, canal:S.canal, destino });
+    $('#ok-prot').textContent = r.protocolo;
+    $('#ok-msg').textContent = `Vamos enviar seu boleto por ${S.canal==='whatsapp'?'WhatsApp':'e-mail'} em até 1 dia útil.`;
+    $('#linhas-ok').innerHTML = resumoHTML(sel,destino);
+    atualizarLinks(r.protocolo); ir('ok');
+  }catch(err){
+    if (err.expirou){ alert('Sua sessão expirou. Faça a consulta novamente.'); sair(); }
+    else alerta('#a-rev', err.message);
+  }finally{ carregando(b,false,'Confirmar e solicitar boleto'); }
+});
+
+/* ======== API ======== */
+async function api(rota, corpo){
+  if (DEMO) return demo(rota, corpo);
+  const r = await fetch(`${CONFIG.api}/${rota}`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(corpo)});
+  const j = await r.json().catch(()=>({erro:'Falha de comunicação. Tente novamente.'}));
+  if (!r.ok){ const e=new Error(j.erro||'Erro inesperado.'); Object.assign(e,j,{status:r.status}); throw e; }
+  return j;
+}
+
+/* ======== Demonstração (sem servidor) ======== */
+async function demo(rota, c){
+  await new Promise(r=>setTimeout(r,600));
+  const hoje = new Date().toLocaleDateString('en-CA',{timeZone:'America/Sao_Paulo'});
+  const menos = n => { const d=new Date(hoje+'T12:00:00Z'); d.setUTCMonth(d.getUTCMonth()-n); return d.toISOString().slice(0,10); };
+  if (rota==='consultar'){
+    if (CONFIG.chave==='nascimento' && c.chave!=='1985-03-12'){ const e=new Error('Os dados não conferem.'); e.status=401; throw e; }
+    return { token:'demo', nome:'MARIANA SOUZA LIMA', email:'mariana.lima@email.com', telefone:'51998765432', hoje, prazoMaxDias:10, pendente:null,
+      parcelas:[
+        {contrato:'000123456789012',produto:'CDC Veículos',parcela:18,vencimento:menos(3),valor:1287.45},
+        {contrato:'000123456789012',produto:'CDC Veículos',parcela:19,vencimento:menos(2),valor:1287.45},
+        {contrato:'000123456789012',produto:'CDC Veículos',parcela:20,vencimento:menos(1),valor:1287.45},
+      ]};
+  }
+  return { protocolo:'DG'+hoje.slice(2).replace(/-/g,'')+Math.floor(1000+Math.random()*9000) };
+}
+if (DEMO){
+  const t=document.createElement('div'); t.className='demo';
+  t.textContent = CONFIG.chave==='nascimento' ? 'Demonstração · use qualquer CPF válido e 12/03/1985' : 'Demonstração';
+  document.body.appendChild(t);
+  $('#cpf').value='529.982.247-25';
+}
+</script>
+</body>
+</html>

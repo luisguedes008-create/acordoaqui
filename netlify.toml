@@ -1,0 +1,68 @@
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Chat Octadesk (apenas o site institucional carrega o script; os domínios ficam liberados no CSP global).
+# Cabeçalhos de segurança. O CSP ainda precisa de 'unsafe-inline' porque o site tem script e estilo dentro do HTML;
+# o ideal é mover para arquivos e remover isso depois.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://*.octadesk.com https://*.octadesk.net https://*.octadesk.services; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.octadesk.com https://*.octadesk.net https://*.octadesk.services; font-src https://fonts.gstatic.com https://*.octadesk.com https://*.octadesk.net https://*.octadesk.services data:; img-src 'self' data: https://www.grupoflex.com.br https://*.octadesk.com https://*.octadesk.net https://*.octadesk.services; connect-src 'self' https://*.octadesk.com https://*.octadesk.net https://*.octadesk.services wss://*.octadesk.com wss://*.octadesk.net wss://*.octadesk.services; frame-src https://challenges.cloudflare.com https://*.octadesk.com https://*.octadesk.net https://*.octadesk.services; frame-ancestors 'none'; base-uri 'self'; media-src 'self' https://*.octadesk.com https://*.octadesk.net https://*.octadesk.services; form-action 'self'"
+
+# ---------- Site institucional da Maxiserv (domínio principal) ----------
+# A raiz de acordoaqui.com.br (e www) abre maxiserv/index.html. Os portais ficam nos subdomínios (flex., digimais.).
+[[redirects]]
+  from = "https://acordoaqui.com.br/"
+  to = "/maxiserv/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://www.acordoaqui.com.br/"
+  to = "/maxiserv/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://acordoaqui.com.br/index.html"
+  to = "/maxiserv/index.html"
+  status = 200
+  force = true
+
+# ---------- Portal Digimais (digimais.acordoaqui.com.br) ----------
+# A raiz do subdomínio abre digimais/index.html; as APIs /api/dg/* são das funções dg-*.
+# Só a raiz é reescrita, para não interferir nas rotas das funções.
+[[redirects]]
+  from = "https://digimais.acordoaqui.com.br/"
+  to = "/digimais/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://digimais.acordoaqui.com.br/index.html"
+  to = "/digimais/index.html"
+  status = 200
+  force = true
+
+# ---------- Portal NBC Bank (nbc.acordoaqui.com.br) ----------
+# A raiz do subdomínio abre nbc/index.html; as APIs /api/* são as mesmas funções (a carteira vem do subdomínio).
+[[redirects]]
+  from = "https://nbc.acordoaqui.com.br/"
+  to = "/nbc/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://nbc.acordoaqui.com.br/index.html"
+  to = "/nbc/index.html"
+  status = 200
+  force = true
